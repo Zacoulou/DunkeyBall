@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc5a1be09f1c814e9fd2947e3941a58, type: 3}
+  m_Name: Jumbo
+  m_EditorClassIdentifier: 
+  appearanceDetails:
+    head: {fileID: -8134894577138830933, guid: 0d362462563f7c745acb139fa0798867, type: 3}
+    torso: {fileID: -5055952334280812485, guid: 0d362462563f7c745acb139fa0798867,
+      type: 3}
+    armL: {fileID: 6243214215227246260, guid: 0d362462563f7c745acb139fa0798867, type: 3}
+    armR: {fileID: 6243214215227246260, guid: 0d362462563f7c745acb139fa0798867, type: 3}
+    tail: {fileID: 0}
+    shoeL: {fileID: -2196426772055759329, guid: 0d362462563f7c745acb139fa0798867,
+      type: 3}
+    shoeR: {fileID: -2196426772055759329, guid: 0d362462563f7c745acb139fa0798867,
+      type: 3}
+  movementStats:
+    movementSpeed: 20
+    jumpForce: 1100
+    sprintMultiplier: 1.75
+  otherStats:
+    shootingAccuracy: 0
+  abilityName: 0

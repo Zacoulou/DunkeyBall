@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PlayerController">
+    <Position X="4" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAQYAAAAAiQBFAIEAgCQAAAAAhAQgAggAEBABAAAhEg=</HashCode>
+      <FileName>Assets\Characters\PlayerController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="appearanceController" />
+      <Field Name="character" />
+      <Field Name="movementController" />
+      <Field Name="playerAnimator" />
+      <Field Name="spriteOrderController" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AppearanceController" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIAAhAAAAAAAAAAAAAAAAAAggCAAAAAACAACAgA=</HashCode>
+      <FileName>Assets\Characters\AppearanceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="Character.AppearanceDetails" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Characters\Character.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Character.MovementStats" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Characters\Character.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Character.OtherStats" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Characters\Character.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="Character.CharacterNames" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Characters\Character.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Character.SpecialAbilities" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Characters\Character.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAQIAAAAAAAAAAAAAAAAAAEAAAAAAAAEgAAAAAAEA=</HashCode>
+      <FileName>Assets\Characters\Character.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="specialAbility" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MovementController2D" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEKQAAGgoggAAIAgAgAEAHACgQgAISQIiAAAAAKAGA=</HashCode>
+      <FileName>Assets\Characters\MovementController2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnimator" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAIKIAgAgAACoCAAEACAgAAikAgAAEQCCIIAABABEA=</HashCode>
+      <FileName>Assets\Characters\PlayerAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteOrderController" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABEA=</HashCode>
+      <FileName>Assets\Characters\SpriteOrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpecialAbility" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Characters\Special Abilities\SpecialAbility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetBig" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAIAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Characters\Special Abilities\GetBig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
