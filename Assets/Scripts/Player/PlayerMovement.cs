@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     public int playerSortingOrder = 0;
-    public Rigidbody2D rb;
+    public Rigidbody rb;
     Vector2 i_movement;
     [System.NonSerialized] public bool isSprinting = false;
     public CharacterController2D controller;
@@ -514,7 +514,6 @@ public class PlayerMovement : MonoBehaviour {
     public void StopPlayer() {
         stoppedState = true;
         i_movement = new Vector2(0f, 0f);
-        //this.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
         SetXYVelocity(0f, 0f);
 
         jump = false;

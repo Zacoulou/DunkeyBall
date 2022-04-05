@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerCollisionController : MonoBehaviour {
     [SerializeField] PlayerController pController;
-    [SerializeField] BoxCollider2D boxCollider2D;
+    [SerializeField] BoxCollider boxCollider;
 
 
     //Detect collisions between the GameObjects with Colliders attached
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerEnter(Collider collision) {
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.CompareTag("Ball")) {
             Ball ball = collision.gameObject.GetComponentInParent<Ball>();
@@ -16,23 +16,22 @@ public class PlayerCollisionController : MonoBehaviour {
             if (pController.GetCanObtainBall()) {
                 pController.ObtainBall(ball);
             }
-
         }
     }
 
-    public BoxCollider2D getBoxCollider2D() {
-        return boxCollider2D;
+    public BoxCollider getBoxCollider() {
+        return boxCollider;
     }
 
-    public IEnumerator DisableCollisionForTime(Collider2D collider, float time) {
-        Physics2D.IgnoreCollision(boxCollider2D, collider);
+    public IEnumerator DisableCollisionForTime(Collider collider, float time) {
+        Physics.IgnoreCollision(boxCollider, collider);
         yield return new WaitForSeconds(time);
-        Physics2D.IgnoreCollision(boxCollider2D, collider, false);
+        Physics.IgnoreCollision(boxCollider, collider, false);
     }
 
-    public IEnumerator DisableCollisionForTime(Collider2D collider1, Collider2D collider2, float time) {
-        Physics2D.IgnoreCollision(collider1, collider2);
+    public IEnumerator DisableCollisionForTime(Collider collider1, Collider collider2, float time) {
+        Physics.IgnoreCollision(collider1, collider2);
         yield return new WaitForSeconds(time);
-        Physics2D.IgnoreCollision(collider1, collider2, false);
+        Physics.IgnoreCollision(collider1, collider2, false);
     }
 }

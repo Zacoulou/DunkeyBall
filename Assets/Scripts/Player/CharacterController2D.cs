@@ -22,7 +22,7 @@ public class CharacterController2D : MonoBehaviour {
 
     const float k_GroundedRadius = 0.1f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
-    private Rigidbody2D m_Rigidbody2D;
+    private Rigidbody m_Rigidbody;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
@@ -32,7 +32,7 @@ public class CharacterController2D : MonoBehaviour {
     public UnityEvent OnLandEvent;
 
     private void Awake() {
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody = GetComponent<Rigidbody>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -49,7 +49,7 @@ public class CharacterController2D : MonoBehaviour {
         for (int i = 0; i < colliders.Length; i++) {
             if (colliders[i].gameObject != gameObject) {
                 m_Grounded = true;
-                if (!wasGrounded && m_Rigidbody2D.velocity.y <= 0)
+                if (!wasGrounded && m_Rigidbody.velocity.y <= 0)
                     OnLandEvent.Invoke();
             }
         }
@@ -74,10 +74,10 @@ public class CharacterController2D : MonoBehaviour {
             }
 
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody.velocity.y);
 
             // And then smoothing it out and applying it to the character
-            m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
             if (flipDirection) {
                 if ((direction.Equals("right") && !m_FacingRight) || (direction.Equals("left") && m_FacingRight))
@@ -104,7 +104,7 @@ public class CharacterController2D : MonoBehaviour {
         //m_Grounded = false;
         variableJumpForce = m_JumpForce * minimumJumpForceMultiplier;
         totalJumpForce = variableJumpForce;
-        m_Rigidbody2D.AddForce(new Vector2(0f, variableJumpForce * m_Rigidbody2D.mass / Time.timeScale));
+        m_Rigidbody.AddForce(new Vector2(0f, variableJumpForce * m_Rigidbody.mass / Time.timeScale));
     }
 
     public void ReleaseJump() {
@@ -124,7 +124,7 @@ public class CharacterController2D : MonoBehaviour {
         }
 
         if (isHoldingJump)
-            m_Rigidbody2D.AddForce(new Vector2(0f, variableJumpForce * m_Rigidbody2D.mass));
+            m_Rigidbody.AddForce(new Vector2(0f, variableJumpForce * m_Rigidbody.mass));
     }
 
 

@@ -46,7 +46,7 @@ public class MovementController2D : MonoBehaviour {
     [SerializeField] LayerMask groundLayerMask;                 //A mask determining what is ground to the character
     [SerializeField] LayerMask OneWayPlatformLayerMask;         //A mask determining what is a one way platform to the character
     [SerializeField] Transform groundCheck;                     //A position marking where to check if the player is grounded
-    Vector2 groundCheckDimensions = new Vector2(0.3f, 0.05f);   //dimensions of overlap rectangle to determine if grounded
+    float groundCheckDimensions = 0.05f;   //dimensions of overlap rectangle to determine if grounded
     bool grounded;                                              //Whether or not the player is grounded.
     bool wasGrounded;                                           //Whether or not the player was grounded last frame
     const float coyoteTime = 0.1f;                              //Time after falling off ledge that you can still jump
@@ -108,7 +108,7 @@ public class MovementController2D : MonoBehaviour {
         wasGrounded = grounded;
         LayerMask acceptableGroundedLayers = groundLayerMask | OneWayPlatformLayerMask;
 
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheck.position, groundCheckDimensions, 0, acceptableGroundedLayers);
+        Collider[] colliders = Physics.OverlapSphere(groundCheck.position, groundCheckDimensions, acceptableGroundedLayers);
         bool isTravelingUpwards = pController.rb.velocity.y > 0;
 
         if (colliders.Length > 0 && !isTravelingUpwards) {
@@ -128,7 +128,7 @@ public class MovementController2D : MonoBehaviour {
     // The player is can wallslide if a cast to the wallCheck position hits anything designated as ground
     void CheckTouchingWall() {
         isTouchingWall = false;
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(wallCheck.position, wallCheckDimensions, 0, groundLayerMask);
+        Collider[] colliders = Physics.OverlapBox(wallCheck.position, wallCheckDimensions, Quaternion.identity, groundLayerMask);
         if (colliders.Length > 0) {
             isTouchingWall = true;
             
@@ -311,7 +311,7 @@ public class MovementController2D : MonoBehaviour {
     private void Jump() {
         if (CheckJumpBuffer() && !isJumping && !isWallJumping && CheckCoyoteTime()) {
             bool isMovingJoystickDown = rawJoystickInput.y <= -joystickMovementDeadzone;
-            Collider2D[] oneWayColliders = Physics2D.OverlapBoxAll(groundCheck.position, groundCheckDimensions, 0, OneWayPlatformLayerMask);
+            Collider[] oneWayColliders = Physics.OverlapSphere(groundCheck.position, groundCheckDimensions, OneWayPlatformLayerMask);
 
             if (!isMovingJoystickDown || oneWayColliders.Length == 0) {
                 isHoldingJump = true;
@@ -320,7 +320,7 @@ public class MovementController2D : MonoBehaviour {
                 totalJumpForce = variableJumpForce;
                 pController.rb.AddForce(new Vector2(0f, variableJumpForce * pController.rb.mass / Time.timeScale));
             } else {
-                Collider2D[] groundColliders = Physics2D.OverlapBoxAll(groundCheck.position, groundCheckDimensions, 0, groundLayerMask);
+                Collider[] groundColliders = Physics.OverlapSphere(groundCheck.position, groundCheckDimensions, groundLayerMask);
  
                 //Checks if player is trying to jump down through one way platform
                 if (isMovingJoystickDown && groundColliders.Length == 0 && oneWayColliders.Length > 0) {
@@ -426,11 +426,11 @@ public class MovementController2D : MonoBehaviour {
         return isSprinting;
     }
 
-    private void OnDrawGizmosSelected() {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawCube(groundCheck.position, groundCheckDimensions);
+    //private void OnDrawGizmosSelected() {
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawCube(groundCheck.position, groundCheckDimensions);
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(wallCheck.position, wallCheckDimensions);
-    }
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawCube(wallCheck.position, wallCheckDimensions);
+    //}
 }

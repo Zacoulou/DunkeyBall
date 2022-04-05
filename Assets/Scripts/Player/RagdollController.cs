@@ -10,10 +10,10 @@ public class RagdollController : MonoBehaviour {
     private Vector3 defaultTorsoScale;
 
     private HingeJoint2D[] joints;
-    [SerializeField] private Rigidbody2D[] rbs;
+    [SerializeField] private Rigidbody[] rbs;
 
-    private Dictionary<Rigidbody2D, Vector3> initialPos = new Dictionary<Rigidbody2D, Vector3>();
-    private Dictionary<Rigidbody2D, Quaternion> initialRot = new Dictionary<Rigidbody2D, Quaternion>();
+    private Dictionary<Rigidbody, Vector3> initialPos = new Dictionary<Rigidbody, Vector3>();
+    private Dictionary<Rigidbody, Quaternion> initialRot = new Dictionary<Rigidbody, Quaternion>();
 
     // Start is called before the first frame update
     void Awake() {
@@ -50,7 +50,7 @@ public class RagdollController : MonoBehaviour {
         animator.enabled = false;
 
         foreach (var rb in rbs) {
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            //rb.bodyType = RigidbodyType2D.Dynamic;
             rb.velocity = currVel;
         }
 
@@ -65,8 +65,8 @@ public class RagdollController : MonoBehaviour {
 
         foreach (var rb in rbs) {
             rb.velocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.angularVelocity = new Vector3(0f, 0f, 0f);
+            //rb.bodyType = RigidbodyType2D.Kinematic;
         }
 
         foreach (var joint in joints) {

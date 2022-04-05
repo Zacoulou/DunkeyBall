@@ -13,10 +13,10 @@ public class PlayerController : MonoBehaviour, IController
     public ShootBall shootBall;                                    //Attached class to manage shooting
     public PlayerStateController stateController;                  //Attached class to manage logic of player state
     public PlayerCollisionController collisionController;          //Attached class to manage logic of player state
-    public GrappleLauncher grappleLauncher;                        //Attached class to manage grapple hook
+    //public GrappleLauncher grappleLauncher;                        //Attached class to manage grapple hook
 
     //ATTACHED COMPONENTS
-    public Rigidbody2D rb;
+    public Rigidbody rb;
 
     //CHARACTER VARIABLES
     Character character;                                    //Scriptable object of selected character
@@ -170,11 +170,11 @@ public class PlayerController : MonoBehaviour, IController
     }
 
     public void onPressRightBumper() {
-        grappleLauncher.SetGrapplePoint();
+        //grappleLauncher.SetGrapplePoint();
     }
 
     public void onReleaseRightBumper() {
-        grappleLauncher.CancelGrapple();
+        //grappleLauncher.CancelGrapple();
     }
 
     public void onPressLeftBumper() {
