@@ -16,7 +16,7 @@ public class CharacterFactory: MonoBehaviour
     }
 
     public GameObject createCharacter(Character character) {
-        this.transform.position = new Vector3(7f, 4f, 0f);
+        this.transform.position = new Vector3(0f, 2f, 0f);
         player = Instantiate(playerPrefab, this.transform) as GameObject;
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.InitializePlayerController(character);

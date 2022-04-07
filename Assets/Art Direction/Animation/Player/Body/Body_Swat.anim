@@ -81,7 +81,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Torso/TorsoBone/ArmL/ArmLBone
+    path: ArmL/ArmLBone
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -115,7 +115,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Torso/TorsoBone/ArmR/ArmRBone
+    path: ArmR/ArmRBone
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -149,7 +149,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Torso/TorsoBone/Head/HeadBone
+    path: Head/HeadBone
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -169,21 +169,21 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2323981058
+      path: 3859350860
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1815264186
+      path: 12492276
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 407232943
+      path: 1959380961
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -356,7 +356,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Torso/TorsoBone/ArmL/ArmLBone
+    path: ArmL/ArmLBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -393,7 +393,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Torso/TorsoBone/ArmL/ArmLBone
+    path: ArmL/ArmLBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -430,7 +430,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Torso/TorsoBone/ArmL/ArmLBone
+    path: ArmL/ArmLBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -467,7 +467,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Torso/TorsoBone/ArmR/ArmRBone
+    path: ArmR/ArmRBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -504,7 +504,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Torso/TorsoBone/ArmR/ArmRBone
+    path: ArmR/ArmRBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -541,7 +541,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Torso/TorsoBone/ArmR/ArmRBone
+    path: ArmR/ArmRBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -578,7 +578,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Torso/TorsoBone/Head/HeadBone
+    path: Head/HeadBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -615,7 +615,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Torso/TorsoBone/Head/HeadBone
+    path: Head/HeadBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -652,7 +652,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Torso/TorsoBone/Head/HeadBone
+    path: Head/HeadBone
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -692,8 +692,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Torso/TorsoBone/ArmL/ArmLBone
+    attribute: m_LocalEulerAngles.z
+    path: ArmR/ArmRBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -703,17 +703,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Torso/TorsoBone/ArmL/ArmLBone
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Torso/TorsoBone/ArmL/ArmLBone
+    path: ArmR/ArmRBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -723,17 +713,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Torso/TorsoBone/ArmR/ArmRBone
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Torso/TorsoBone/ArmR/ArmRBone
+    path: ArmR/ArmRBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -743,7 +723,17 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Torso/TorsoBone/ArmR/ArmRBone
+    path: ArmL/ArmLBone
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: ArmL/ArmLBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -753,7 +743,17 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Torso/TorsoBone/Head/HeadBone
+    path: ArmL/ArmLBone
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Head/HeadBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -763,7 +763,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Torso/TorsoBone/Head/HeadBone
+    path: Head/HeadBone
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -773,7 +773,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Torso/TorsoBone/Head/HeadBone
+    path: Head/HeadBone
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

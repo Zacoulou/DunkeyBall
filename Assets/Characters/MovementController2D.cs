@@ -123,6 +123,8 @@ public class MovementController2D : MonoBehaviour {
         } else {
             grounded = false;
         }
+
+        Debug.Log("Grounded: " + grounded);
     }
 
     // The player is can wallslide if a cast to the wallCheck position hits anything designated as ground
@@ -205,8 +207,9 @@ public class MovementController2D : MonoBehaviour {
 
         //only control the player if grounded or airControl is turned on
         if (canMove && canLeaveWallSlide) {
-
-            movementVector = new Vector2(rawJoystickInput.x * movementStats.movementSpeed * Time.fixedDeltaTime * 10f, 0f);
+            float x_Vector = rawJoystickInput.x * movementStats.movementSpeed * Time.fixedDeltaTime * 10f;
+            float z_Vector = rawJoystickInput.y * movementStats.movementSpeed * Time.fixedDeltaTime * 10f;
+            movementVector = new Vector2(x_Vector, z_Vector);
 
             if (isSprinting) {
                 // increase the speed by the sprint multiplier
@@ -216,7 +219,7 @@ public class MovementController2D : MonoBehaviour {
             //REGULAR MOVEMENT
             if (grounded) {
                 // Move the character by finding the target velocity
-                Vector3 targetVelocity = new Vector2(movementVector.x, pController.rb.velocity.y);
+                Vector3 targetVelocity = new Vector3(movementVector.x, pController.rb.velocity.y, movementVector.y);
 
                 // And then smoothing it out and applying it to the character
                 pController.rb.velocity = Vector3.SmoothDamp(pController.rb.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
@@ -224,9 +227,11 @@ public class MovementController2D : MonoBehaviour {
             //AIRBORNE MOVEMENT
             else {
                 //Adds force to have momentum influence movement in air
-                pController.rb.AddForce(new Vector2(movementVector.x * pController.rb.mass * airBorneForce, 0f));
-                if (Mathf.Abs(pController.rb.velocity.x) > Mathf.Abs(movementVector.x) && movementVector.x != 0f) {
-                    Vector3 targetVelocity = new Vector2(movementVector.x, pController.rb.velocity.y);
+                float movementForce = pController.rb.mass * airBorneForce;
+                pController.rb.AddForce(new Vector3(movementVector.x * movementForce, 0f, movementVector.y * movementForce));
+                if ((Mathf.Abs(pController.rb.velocity.x) > Mathf.Abs(movementVector.x) && movementVector.x != 0f)
+                    || (Mathf.Abs(pController.rb.velocity.z) > Mathf.Abs(movementVector.y) && movementVector.y != 0f)) {
+                    Vector3 targetVelocity = new Vector3(movementVector.x, pController.rb.velocity.y, movementVector.y);
                     pController.rb.velocity = Vector3.SmoothDamp(pController.rb.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
                 }
             }
@@ -426,11 +431,11 @@ public class MovementController2D : MonoBehaviour {
         return isSprinting;
     }
 
-    //private void OnDrawGizmosSelected() {
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawCube(groundCheck.position, groundCheckDimensions);
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(groundCheck.position, groundCheckDimensions);
 
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawCube(wallCheck.position, wallCheckDimensions);
-    //}
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(wallCheck.position, wallCheckDimensions);
+    }
 }
