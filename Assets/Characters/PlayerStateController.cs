@@ -50,7 +50,7 @@ public class PlayerStateController : MonoBehaviour
         PlayerStates state = PlayerStates.NONE;
 
         //NOT MOVING: IDLE STATE
-        if (!IsMovingX() && !IsMovingY()) {
+        if (!IsMovingX() && !IsMovingZ() && !IsMovingY()) {
             if (pController.GetBallInPossession())
                 state = PlayerStates.IDLE_DRIBBLING;
             else
@@ -79,7 +79,7 @@ public class PlayerStateController : MonoBehaviour
             }
         }
         //MOVING AND grounded: RUNNING OR DRIBBLING
-        else if (IsMovingX() && WasGrounded()) {
+        else if ((IsMovingX() || IsMovingZ()) && WasGrounded()) {
             if (pController.GetBallInPossession()) {
                 if (pController.movementController.GetIsSprinting())
                     state = PlayerStates.SPRINTING_DRIBBLING;
@@ -115,6 +115,11 @@ public class PlayerStateController : MonoBehaviour
     bool IsMovingY() {
         float yVect = pController.rb.velocity.y;
         return (yVect > deadSpeed || yVect < -deadSpeed);
+    }
+
+    bool IsMovingZ() {
+        float zVect = pController.rb.velocity.z;
+        return (zVect > deadSpeed || zVect < -deadSpeed);
     }
 
     float YMovement() {

@@ -54,7 +54,7 @@ public class MovementController2D : MonoBehaviour {
 
     //WALL
     [SerializeField] Transform wallCheck;                       //A position marking where to check if the player is touching a wall
-    Vector2 wallCheckDimensions = new Vector2(0.05f, 0.9f);     //dimensions of overlap rectangle to determine if touching a wall
+    Vector2 wallCheckDimensions = new Vector2(0.05f, 0.7f);     //dimensions of overlap rectangle to determine if touching a wall
     bool isTouchingWall;
     
     //WALL SLIDING
@@ -124,7 +124,6 @@ public class MovementController2D : MonoBehaviour {
             grounded = false;
         }
 
-        Debug.Log("Grounded: " + grounded);
     }
 
     // The player is can wallslide if a cast to the wallCheck position hits anything designated as ground
@@ -133,7 +132,6 @@ public class MovementController2D : MonoBehaviour {
         Collider[] colliders = Physics.OverlapBox(wallCheck.position, wallCheckDimensions, Quaternion.identity, groundLayerMask);
         if (colliders.Length > 0) {
             isTouchingWall = true;
-            
         }
     }
 
@@ -213,7 +211,8 @@ public class MovementController2D : MonoBehaviour {
 
             if (isSprinting) {
                 // increase the speed by the sprint multiplier
-                movementVector.x *= movementStats.sprintMultiplier;
+                Vector2 clampedJoystick = Vector2.ClampMagnitude(rawJoystickInput, 1f);
+                movementVector += clampedJoystick.normalized * movementStats.sprintMultiplier;
             }
 
             //REGULAR MOVEMENT

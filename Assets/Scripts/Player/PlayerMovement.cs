@@ -85,9 +85,9 @@ public class PlayerMovement : MonoBehaviour {
         MovingCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MultipleTargetCamera>();
 
         //Find game ball and hoops, then set correct hoop for player
-        ball = GameObject.FindObjectOfType(typeof(Basketball)) as Basketball;
+        ball = FindObjectOfType(typeof(Basketball)) as Basketball;
 
-        Hoop[] hoops = GameObject.FindObjectsOfType(typeof(Hoop)) as Hoop[];
+        Hoop[] hoops = FindObjectsOfType(typeof(Hoop)) as Hoop[];
         for (int i = 0; i < hoops.Length; i++) {
             if (hoops[i].team == this.playerTeam) {
                 hoop = hoops[i] as Hoop;

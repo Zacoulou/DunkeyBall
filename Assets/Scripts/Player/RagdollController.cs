@@ -50,14 +50,14 @@ public class RagdollController : MonoBehaviour {
         animator.enabled = false;
 
         foreach (var rb in rbs) {
-            //rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gameObject.GetComponent<CapsuleCollider>().enabled = true;
             rb.isKinematic = false;
             rb.velocity = currVel;
         }
 
-        foreach (var joint in joints) {
-            joint.gameObject.SetActive(true);
-        }
+        //foreach (var joint in joints) {
+        //    joint.gameObject.SetActive(true);
+        //}
     }
 
     public void DisableRagdoll() {
@@ -65,15 +65,15 @@ public class RagdollController : MonoBehaviour {
         animator.enabled = true;
 
         foreach (var rb in rbs) {
+            rb.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            rb.isKinematic = true;
             rb.velocity = Vector2.zero;
             rb.angularVelocity = new Vector3(0f, 0f, 0f);
-            //rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.isKinematic = true;
         }
 
-        foreach (var joint in joints) {
-            joint.gameObject.SetActive(false);
-        }
+        //foreach (var joint in joints) {
+        //    joint.gameObject.SetActive(false);
+        //}
     }
 
     public float GetRagdollRot() {
