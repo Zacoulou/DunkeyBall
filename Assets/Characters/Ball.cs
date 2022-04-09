@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public CircleCollider2D inRangeCollider;
-    public CircleCollider2D physicsCollider;
+    public Rigidbody rb;
+    public SphereCollider inRangeCollider;
+    public SphereCollider physicsCollider;
     public SpriteRenderer spriteRenderer;
     GameObject playerWithPossesion = null;
     float gravScale = 1;
@@ -19,14 +19,14 @@ public class Ball : MonoBehaviour
         this.transform.position = new Vector2(xPos, yPos);
     }
 
-    public void SetAngularVelocity(float angularVel) {
+    public void SetAngularVelocity(Vector3 angularVel) {
         rb.angularVelocity = angularVel;
     }
 
     public void SetPlayerWithPossesion(GameObject player) {
         playerWithPossesion = player;
         ApplyForce(0.0f, 0.0f);
-        SetAngularVelocity(0.0f);
+        SetAngularVelocity(new Vector3(0.0f, 0.0f, 0.0f));
 
         if (player != null) {
             SetDeadBall();
@@ -34,10 +34,7 @@ public class Ball : MonoBehaviour
     }
 
     public void SetGravityScale(bool state) {
-        if (state)
-            rb.gravityScale = gravScale;
-        else
-            rb.gravityScale = 0;
+        rb.useGravity = state;
     }
 
     public void SetDeadBall() {

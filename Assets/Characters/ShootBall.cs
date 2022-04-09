@@ -61,9 +61,9 @@ public class ShootBall : MonoBehaviour
 
                 //Apply backspin to shot depending on direction of shot
                 if (shotReleasePoint.position.x < hoop.centerBasket.position.x) {
-                    ball.SetAngularVelocity(backspin);
+                    ball.SetAngularVelocity(new Vector3(0f, 0f, backspin));
                 } else {
-                    ball.SetAngularVelocity(-backspin);
+                    ball.SetAngularVelocity(new Vector3(0f, 0f, -backspin));
                 }
 
                 pController.SetHasBall(false);
