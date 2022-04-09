@@ -48,15 +48,16 @@ public class ShootBall : MonoBehaviour
 
                 float xVel = CalcXspeed(releaseTiming, hoop.centerBasket.position.x);
                 float yVel = CalcYspeed(hoop.centerBasket.position.y);
+                float zVel = CalcZspeed(hoop.centerBasket.position.z);
 
-                //Debug.Log(releaseTiming + " | " + xVel + " | " + yVel);
+                //Debug.Log(releaseTiming + " | " + xVel + " | " + yVel + " | " + zVel);
 
                 //move ball to shot release position
                 ball.gameObject.SetActive(true);
-                ball.PositionBall(shotReleasePoint.position.x, shotReleasePoint.position.y);
+                ball.PositionBall(shotReleasePoint.position);
 
                 //Apply calculated x and y velocity components to ball
-                ball.ApplyForce(xVel, yVel);
+                ball.ApplyForce(new Vector3(xVel, yVel, zVel));
 
 
                 //Apply backspin to shot depending on direction of shot
@@ -98,5 +99,18 @@ public class ShootBall : MonoBehaviour
         float yVel = ((0.5f * -gravity * shotTime * shotTime) + (desiredY - currentY)) / shotTime;
 
         return yVel;
+    }
+
+
+    float CalcZspeed(float desiredZ) {
+        float currentZ = shotReleasePoint.position.z;
+        float mapGrav = Physics2D.gravity.y;
+
+        //change shotTime based on proximity to hoop and gravity scale to alter arc and add error
+        shotTime = (-29.43f / mapGrav * Math.Abs(desiredZ - currentZ) / 20f) + 0.6f;
+
+        float zVel = (desiredZ - currentZ) / shotTime;
+
+        return zVel;
     }
 }

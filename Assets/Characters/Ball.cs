@@ -11,12 +11,12 @@ public class Ball : MonoBehaviour
     float gravScale = 1;
     bool deadBall = false;
 
-    public void ApplyForce(float xVelocity, float yVelocity) {
-        rb.velocity = new Vector2(xVelocity, yVelocity);
+    public void ApplyForce(Vector3 velocityVector) {
+        rb.velocity = velocityVector;
     }
 
-    public void PositionBall(float xPos, float yPos) {
-        this.transform.position = new Vector2(xPos, yPos);
+    public void PositionBall(Vector3 transform) {
+        this.transform.position = transform;
     }
 
     public void SetAngularVelocity(Vector3 angularVel) {
@@ -25,7 +25,7 @@ public class Ball : MonoBehaviour
 
     public void SetPlayerWithPossesion(GameObject player) {
         playerWithPossesion = player;
-        ApplyForce(0.0f, 0.0f);
+        ApplyForce(new Vector3(0.0f, 0.0f, 0.0f));
         SetAngularVelocity(new Vector3(0.0f, 0.0f, 0.0f));
 
         if (player != null) {
@@ -41,8 +41,9 @@ public class Ball : MonoBehaviour
         deadBall = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Ground")) {
+            Debug.Log("DeadBall");
             SetDeadBall();
         }
     }
