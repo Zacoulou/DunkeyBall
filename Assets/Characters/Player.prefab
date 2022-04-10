@@ -5776,7 +5776,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.009283448, y: -0.15345512, z: 0}
+  m_ConnectedAnchor: {x: 0.018566895, y: -0.30691025, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -6057,7 +6057,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8bd81485e96e90b45ad0f07422e42427, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
