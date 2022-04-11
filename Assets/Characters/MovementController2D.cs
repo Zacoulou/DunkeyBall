@@ -279,12 +279,12 @@ public class MovementController2D : MonoBehaviour {
         switch (direction) {
             case FacingDirection.LEFT:
                 wallJumpDirection = 1;
-                transform.Rotate(0f, 180f, 0f);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 break;
 
             case FacingDirection.RIGHT:
                 wallJumpDirection = -1;
-                transform.Rotate(0f, 180f, 0f);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 break;
 
             default:

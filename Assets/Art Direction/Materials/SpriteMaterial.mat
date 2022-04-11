@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SpriteMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 162eea6dbf1af6c4b9b6e55a51a8faef,
+  m_Shader: {fileID: -6465566751694194690, guid: 7a59b22183c1ead4dbdb83561c602d52,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
