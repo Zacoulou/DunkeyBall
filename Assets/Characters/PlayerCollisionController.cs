@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCollisionController : MonoBehaviour {
     [SerializeField] PlayerController pController;
-    [SerializeField] BoxCollider boxCollider;
+    [SerializeField] CapsuleCollider capsuleCollider;
 
 
     //Detect collisions between the GameObjects with Colliders attached
@@ -19,14 +19,14 @@ public class PlayerCollisionController : MonoBehaviour {
         }
     }
 
-    public BoxCollider getBoxCollider() {
-        return boxCollider;
+    public CapsuleCollider getCapsuleCollider() {
+        return capsuleCollider;
     }
 
     public IEnumerator DisableCollisionForTime(Collider collider, float time) {
-        Physics.IgnoreCollision(boxCollider, collider);
+        Physics.IgnoreCollision(capsuleCollider, collider);
         yield return new WaitForSeconds(time);
-        Physics.IgnoreCollision(boxCollider, collider, false);
+        Physics.IgnoreCollision(capsuleCollider, collider, false);
     }
 
     public IEnumerator DisableCollisionForTime(Collider collider1, Collider collider2, float time) {
