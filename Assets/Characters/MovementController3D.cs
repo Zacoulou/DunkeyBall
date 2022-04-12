@@ -13,7 +13,7 @@ public class MovementController3D : MonoBehaviour {
     
     //MOVEMENT VARIABLES
     Character.MovementStats movementStats;                      //Class of all player stats
-    Vector2 movementVector;                                     //movement vector used to move player (accounts for speed and time)
+    Vector3 movementVector;                                     //movement vector used to move player (accounts for speed and time)
     Vector3 m_Velocity = Vector3.zero;                          //Reference velocity vector used for smoothdamping
     bool isSprinting = false;                                   //Whether or not player is spriting
     bool canMove = true;                                        //Whether or not character is allowed to move
@@ -71,7 +71,14 @@ public class MovementController3D : MonoBehaviour {
     Vector2 wallJumpAngle = new Vector2(1f, 3f);                //Angle of wall jump (This needs to be normalized before use)
     bool isWallJumping = false;                                 //Whether or not the character is currently mid walljump
     const float wallJumpDisableMovementTime = 0.05f;            //Buffer time where player cannot input any movement after wall jumping 
-    
+
+    //SLOPE MOVEMENT
+    bool isOnSteepSlope = false;
+    float groundRayDistance = 1;
+    RaycastHit slopeHit;
+    [SerializeField, Range(0, 90)]
+    float maxGroundAngle = 10f;
+
     enum FacingDirection {
         RIGHT = 0,
         LEFT = 1
@@ -109,13 +116,13 @@ public class MovementController3D : MonoBehaviour {
         LayerMask acceptableGroundedLayers = groundLayerMask | OneWayPlatformLayerMask;
 
         Collider[] colliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, acceptableGroundedLayers);
-        bool isTravelingUpwards = pController.rb.velocity.y > 0;
 
-        if (colliders.Length > 0 && !isTravelingUpwards) {
+        if (colliders.Length > 0 ){
             grounded = true;
             lastGroundedTime = Time.realtimeSinceStartup;
             isWallJumping = false;
             isJumping = false;
+            isOnSteepSlope = OnSteepSlope();
 
             if (!wasGrounded) {
                 OnLandEvent.Invoke();
@@ -124,6 +131,21 @@ public class MovementController3D : MonoBehaviour {
             grounded = false;
         }
 
+    }
+
+    bool OnSteepSlope() {
+        bool onSteepSlope = false;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (pController.collisionController.getCapsuleCollider().height)/2 + groundRayDistance)) {
+            float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
+            if (slopeAngle > maxGroundAngle)
+                onSteepSlope = true;
+        }
+        return onSteepSlope;
+    }
+
+    Vector3 getSlopeDirection() {
+        return Vector3.up - slopeHit.normal * Vector3.Dot(Vector3.up, slopeHit.normal);
     }
 
     // The player is can wallslide if a cast to the wallCheck position hits anything designated as ground
@@ -207,18 +229,37 @@ public class MovementController3D : MonoBehaviour {
         if (canMove && canLeaveWallSlide) {
             float x_Vector = rawJoystickInput.x * movementStats.movementSpeed * Time.fixedDeltaTime * 10f;
             float z_Vector = rawJoystickInput.y * movementStats.movementSpeed * Time.fixedDeltaTime * 10f;
-            movementVector = new Vector2(x_Vector, z_Vector);
+            movementVector = new Vector3(x_Vector, 0.0f, z_Vector);
 
             if (isSprinting) {
                 // increase the speed by the sprint multiplier
-                Vector2 clampedJoystick = Vector2.ClampMagnitude(rawJoystickInput, 1f);
-                movementVector += clampedJoystick.normalized * movementStats.sprintMultiplier;
+                Vector2 clampedJoystick = Vector2.ClampMagnitude(rawJoystickInput, 1f).normalized;
+                Vector3 transformedClampedJoystick = new Vector3(clampedJoystick.x, 0f, clampedJoystick.y);
+                movementVector += transformedClampedJoystick * movementStats.sprintMultiplier;
+            }
+
+            if (!isOnSteepSlope) {
+                Debug.Log("ON STEEP SLOPE" + getSlopeDirection());
+                Vector3 slopeVector = getSlopeDirection();
+                //SLIDE
+                //movementVector = getSlopeDirection() * -5f;
+                //movementVector.y -= slopeHit.point.y;
+
+                float XYangle = Mathf.Atan2(Mathf.Abs(slopeVector.y), Mathf.Abs(slopeVector.x));
+                float ZYangle = Mathf.Atan2(Mathf.Abs(slopeVector.y), Mathf.Abs(slopeVector.z));
+                //float largerAngle = ZYangle > XYangle ? ZYangle : XYangle;
+
+                movementVector.y += Mathf.Abs(movementVector.x) * Mathf.Sin(XYangle);
+                movementVector.x *= Mathf.Cos(XYangle);
+                //movementVector.z *= Mathf.Cos(ZYangle);
+                Debug.Log("XY: " + XYangle + "  ZY:  " + ZYangle + "  XVector: " + movementVector.x + " YVector:  " + movementVector.y);
+
             }
 
             //REGULAR MOVEMENT
             if (grounded) {
                 // Move the character by finding the target velocity
-                Vector3 targetVelocity = new Vector3(movementVector.x, pController.rb.velocity.y, movementVector.y);
+                Vector3 targetVelocity = new Vector3(movementVector.x, pController.rb.velocity.y + movementVector.y, movementVector.z);
 
                 // And then smoothing it out and applying it to the character
                 pController.rb.velocity = Vector3.SmoothDamp(pController.rb.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
@@ -227,10 +268,10 @@ public class MovementController3D : MonoBehaviour {
             else {
                 //Adds force to have momentum influence movement in air
                 float movementForce = pController.rb.mass * airBorneForce;
-                pController.rb.AddForce(new Vector3(movementVector.x * movementForce, 0f, movementVector.y * movementForce));
+                pController.rb.AddForce(new Vector3(movementVector.x * movementForce, 0f, movementVector.z * movementForce));
                 if ((Mathf.Abs(pController.rb.velocity.x) > Mathf.Abs(movementVector.x) && movementVector.x != 0f)
-                    || (Mathf.Abs(pController.rb.velocity.z) > Mathf.Abs(movementVector.y) && movementVector.y != 0f)) {
-                    Vector3 targetVelocity = new Vector3(movementVector.x, pController.rb.velocity.y, movementVector.y);
+                    || (Mathf.Abs(pController.rb.velocity.z) > Mathf.Abs(movementVector.z) && movementVector.z != 0f)) {
+                    Vector3 targetVelocity = new Vector3(movementVector.x, pController.rb.velocity.y, movementVector.z);
                     pController.rb.velocity = Vector3.SmoothDamp(pController.rb.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
                 }
             }
