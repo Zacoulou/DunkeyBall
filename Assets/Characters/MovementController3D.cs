@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class MovementController2D : MonoBehaviour {
+public class MovementController3D : MonoBehaviour {
     
     //INSPECTOR PANEL
     [SerializeField] PlayerController pController;              //Reference to PlayerController
@@ -46,7 +46,7 @@ public class MovementController2D : MonoBehaviour {
     [SerializeField] LayerMask groundLayerMask;                 //A mask determining what is ground to the character
     [SerializeField] LayerMask OneWayPlatformLayerMask;         //A mask determining what is a one way platform to the character
     [SerializeField] Transform groundCheck;                     //A position marking where to check if the player is grounded
-    float groundCheckDimensions = 0.05f;   //dimensions of overlap rectangle to determine if grounded
+    [SerializeField] float groundCheckRadius;                   //dimensions of overlap rectangle to determine if grounded
     bool grounded;                                              //Whether or not the player is grounded.
     bool wasGrounded;                                           //Whether or not the player was grounded last frame
     const float coyoteTime = 0.1f;                              //Time after falling off ledge that you can still jump
@@ -108,7 +108,7 @@ public class MovementController2D : MonoBehaviour {
         wasGrounded = grounded;
         LayerMask acceptableGroundedLayers = groundLayerMask | OneWayPlatformLayerMask;
 
-        Collider[] colliders = Physics.OverlapSphere(groundCheck.position, groundCheckDimensions, acceptableGroundedLayers);
+        Collider[] colliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, acceptableGroundedLayers);
         bool isTravelingUpwards = pController.rb.velocity.y > 0;
 
         if (colliders.Length > 0 && !isTravelingUpwards) {
@@ -315,7 +315,7 @@ public class MovementController2D : MonoBehaviour {
     private void Jump() {
         if (CheckJumpBuffer() && !isJumping && !isWallJumping && CheckCoyoteTime()) {
             bool isMovingJoystickDown = rawJoystickInput.y <= -joystickMovementDeadzone;
-            Collider[] oneWayColliders = Physics.OverlapSphere(groundCheck.position, groundCheckDimensions, OneWayPlatformLayerMask);
+            Collider[] oneWayColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, OneWayPlatformLayerMask);
 
             if (!isMovingJoystickDown || oneWayColliders.Length == 0) {
                 isHoldingJump = true;
@@ -324,7 +324,7 @@ public class MovementController2D : MonoBehaviour {
                 totalJumpForce = variableJumpForce;
                 pController.rb.AddForce(new Vector2(0f, variableJumpForce * pController.rb.mass / Time.timeScale));
             } else {
-                Collider[] groundColliders = Physics.OverlapSphere(groundCheck.position, groundCheckDimensions, groundLayerMask);
+                Collider[] groundColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayerMask);
  
                 //Checks if player is trying to jump down through one way platform
                 if (isMovingJoystickDown && groundColliders.Length == 0 && oneWayColliders.Length > 0) {
@@ -432,7 +432,7 @@ public class MovementController2D : MonoBehaviour {
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(groundCheck.position, groundCheckDimensions);
+        Gizmos.DrawSphere(groundCheck.position, groundCheckRadius);
 
         Gizmos.color = Color.green;
         Gizmos.DrawCube(wallCheck.position, wallCheckDimensions);

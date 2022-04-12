@@ -6,7 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerController : MonoBehaviour, IController
 {
     //CONTROLLERS
-    public MovementController2D movementController;                //Attached class with movement mechanics
+    public MovementController3D movementController;                //Attached class with movement mechanics
     public AppearanceController appearanceController;              //Attached class to modify character appearance
     public PlayerAnimator playerAnimator;                          //Attached class to manage player animations
     public SpriteOrderController spriteOrderController;            //Attached class to manage sprites sorting order

@@ -6362,6 +6362,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   groundCheck: {fileID: 3382727447360421637}
+  groundCheckRadius: 0.05
   wallCheck: {fileID: 3382727445870568918}
 --- !u!114 &3382727447316845735
 MonoBehaviour:
