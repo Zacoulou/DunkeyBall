@@ -6245,7 +6245,6 @@ GameObject:
   - component: {fileID: 5605449039766712785}
   - component: {fileID: 5837359460340006416}
   - component: {fileID: 5854561619907430989}
-  - component: {fileID: 1172942940635882319}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -6506,33 +6505,6 @@ CapsuleCollider:
   m_Height: 1.2041667
   m_Direction: 1
   m_Center: {x: 0, y: 0.08011782, z: 0}
---- !u!114 &1172942940635882319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3382727447316845733}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d206fb17235d9a04f9ab3fa2dd219fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 60
-  maxAcceleration: 30
-  maxAirAcceleration: 1
-  jumpHeight: 2
-  maxAirJumps: 0
-  maxGroundAngle: 85
-  maxStairsAngle: 50
-  maxSnapSpeed: 100
-  probeDistance: 1
-  probeMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  stairsMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &3382727447360421638
 GameObject:
   m_ObjectHideFlags: 0
