@@ -133,21 +133,6 @@ public class MovementController3D : MonoBehaviour {
 
     }
 
-    bool OnSteepSlope() {
-        bool onSteepSlope = false;
-
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (pController.collisionController.getCapsuleCollider().height)/2 + groundRayDistance)) {
-            float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
-            if (slopeAngle > maxGroundAngle)
-                onSteepSlope = true;
-        }
-        return onSteepSlope;
-    }
-
-    Vector3 getSlopeDirection() {
-        return Vector3.up - slopeHit.normal * Vector3.Dot(Vector3.up, slopeHit.normal);
-    }
-
     // The player is can wallslide if a cast to the wallCheck position hits anything designated as ground
     void CheckTouchingWall() {
         isTouchingWall = false;
@@ -221,8 +206,22 @@ public class MovementController3D : MonoBehaviour {
         canMove = true;
     }
 
+    bool OnSteepSlope() {
+        bool onSteepSlope = false;
 
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (pController.collisionController.getCapsuleCollider().height) / 2 + groundRayDistance)) {
+            float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
+            if (slopeAngle >= maxGroundAngle)
+                onSteepSlope = true;
+        }
+        return onSteepSlope;
+    }
 
+    Vector3 getSlopeDirection() {
+        return Vector3.up - slopeHit.normal * Vector3.Dot(Vector3.up, slopeHit.normal);
+    }
+
+    
     public void Move() {
 
         //only control the player if grounded or airControl is turned on
@@ -239,21 +238,27 @@ public class MovementController3D : MonoBehaviour {
             }
 
             if (!isOnSteepSlope) {
-                Debug.Log("ON STEEP SLOPE" + getSlopeDirection());
+                //ADJUST movement to align with slope
                 Vector3 slopeVector = getSlopeDirection();
-                //SLIDE
-                //movementVector = getSlopeDirection() * -5f;
-                //movementVector.y -= slopeHit.point.y;
 
-                float XYangle = Mathf.Atan2(Mathf.Abs(slopeVector.y), Mathf.Abs(slopeVector.x));
-                float ZYangle = Mathf.Atan2(Mathf.Abs(slopeVector.y), Mathf.Abs(slopeVector.z));
-                //float largerAngle = ZYangle > XYangle ? ZYangle : XYangle;
+                //Get slopes in XY plane and ZY plane
+                float XYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.x));
+                float ZYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.z));
+                // Flat ground is seen as 90 degrees but should be zero, so translate it to zero if between 89 - 90 degrees
+                if (XYangle > 1.55334 && XYangle < 1.58825) { XYangle = 0f; }
+                if (ZYangle > 1.55334 && ZYangle < 1.58825) { ZYangle = 0f; }
+                //The Y velocity only cares about which angle is greater, so base Y on larger values
+                float largerAngle = ZYangle >= XYangle ? ZYangle : XYangle;
+                float yMovementBasis = XYangle >= ZYangle ? movementVector.x : movementVector.z;
 
-                movementVector.y += Mathf.Abs(movementVector.x) * Mathf.Sin(XYangle);
+                movementVector.y += Mathf.Abs(yMovementBasis) * Mathf.Sin(largerAngle);
                 movementVector.x *= Mathf.Cos(XYangle);
-                //movementVector.z *= Mathf.Cos(ZYangle);
-                Debug.Log("XY: " + XYangle + "  ZY:  " + ZYangle + "  XVector: " + movementVector.x + " YVector:  " + movementVector.y);
-
+                movementVector.z *= Mathf.Cos(ZYangle);
+                //Debug.Log("XY: " + XYangle * Mathf.Rad2Deg + "  ZY:  " + ZYangle * Mathf.Rad2Deg + "  SLOPE VECTOR: " + getSlopeDirection() + " Y modifier: " + Mathf.Sin(largerAngle));
+            } else {
+                //SLIDE
+                movementVector = getSlopeDirection() * -7f;
+                movementVector.y -= slopeHit.point.y;
             }
 
             //REGULAR MOVEMENT
@@ -263,6 +268,7 @@ public class MovementController3D : MonoBehaviour {
 
                 // And then smoothing it out and applying it to the character
                 pController.rb.velocity = Vector3.SmoothDamp(pController.rb.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
             } 
             //AIRBORNE MOVEMENT
             else {
