@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3D_Prototype.unity
     guid: 4a70630bccfc80d4db18de32e1bbfa5c
+  - enabled: 1
+    path: Assets/Scenes/MovementTest.unity
+    guid: 60c2bf2f7a310ea408bbddd54354dce7
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 657b859053bb6a74a9ff495b1b3e61ec,
       type: 2}

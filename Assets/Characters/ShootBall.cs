@@ -9,16 +9,23 @@ public class ShootBall : MonoBehaviour
     [SerializeField] Transform shotReleasePoint;
     [SerializeField] ShotReleaseMeter shotMeter;
     const float backspin = 500.0f;
-    float shotTime = 1.0f;
     bool isAiming = false;
+    float ballGravity = 0f;
+    Ball ball;
 
     public void OnStartShot() {
         //TimeManager.Instance.StartSlowMotion(2f, 0.1f);
         //MovingCam.AddTarget(hoop.transform);
-        if (pController.GetBallInPossession()) {
+        ball = pController.GetBallInPossession();
+        if (ball != null) {
             isAiming = true;
             shotMeter.StartShotMeter();
+            setBallGravity();
         }
+    }
+
+    void setBallGravity() {
+        ballGravity = ball.GetComponent<CustomGravity>().gravityScale * CustomGravity.globalGravity;
     }
 
     void cancelShot() {
@@ -46,9 +53,7 @@ public class ShootBall : MonoBehaviour
                     //Debug.Log("Perfect Shot!");
                 }
 
-                float xVel = CalcXspeed(releaseTiming, hoop.centerBasket.position.x);
-                float yVel = CalcYspeed(hoop.centerBasket.position.y);
-                float zVel = CalcZspeed(hoop.centerBasket.position.z);
+                Vector3 shotVector = CalculateShotVector(releaseTiming, hoop.centerBasket.position);
 
                 //Debug.Log(releaseTiming + " | " + xVel + " | " + yVel + " | " + zVel);
 
@@ -57,7 +62,7 @@ public class ShootBall : MonoBehaviour
                 ball.PositionBall(shotReleasePoint.position);
 
                 //Apply calculated x and y velocity components to ball
-                ball.ApplyForce(new Vector3(xVel, yVel, zVel));
+                ball.ApplyForce(shotVector);
 
 
                 //Apply backspin to shot depending on direction of shot
@@ -79,38 +84,34 @@ public class ShootBall : MonoBehaviour
         return value * UnityEngine.Random.Range(1f - error, 1f + error);
     }
 
-    float CalcXspeed(float releaseTiming, float desiredX) {
+    Vector3 CalculateShotVector(float releaseTiming, Vector3 desiredPosition) {
+        Vector3 shotVector = new Vector3(0,0,0);
         float currentX = shotReleasePoint.position.x;
-        float mapGrav = Physics2D.gravity.y;
-
-        //change shotTime based on proximity to hoop and gravity scale to alter arc and add error
-        shotTime = ApplyErrorTo((-29.43f / mapGrav) * (Math.Abs(desiredX - currentX)) / 20f, 1f - releaseTiming) + 0.6f;
-
-        float xVel = (desiredX - currentX) / shotTime;
-
-        return ApplyErrorTo(xVel, 1f - releaseTiming);
-    }
-
-
-    float CalcYspeed(float desiredY) {
         float currentY = shotReleasePoint.position.y;
-        float gravity = Physics2D.gravity.y;
+        float currentZ = shotReleasePoint.position.z;
 
-        float yVel = ((0.5f * -gravity * shotTime * shotTime) + (desiredY - currentY)) / shotTime;
+        //change shotTime based on proximity to hoop and gravity scale to alter arc and add error
+        float shotTime = Vector3.Distance(shotReleasePoint.position, desiredPosition) / 8f;
+        shotTime = Mathf.Clamp(shotTime, 0.8f, 2f);
 
-        return yVel;
+        shotVector.x = CalcXspeed(currentX, desiredPosition.x, shotTime);
+        shotVector.y = CalcYspeed(currentY, desiredPosition.y, shotTime);
+        shotVector.z = CalcZspeed(currentZ, desiredPosition.z, shotTime);
+
+        return shotVector;
+    }
+
+    float CalcXspeed(float currentX, float desiredX, float shotTime) {
+        return (desiredX - currentX) / shotTime; 
     }
 
 
-    float CalcZspeed(float desiredZ) {
-        float currentZ = shotReleasePoint.position.z;
-        float mapGrav = Physics2D.gravity.y;
+    float CalcYspeed(float currentY, float desiredY, float shotTime) {
+        return ((0.5f * -ballGravity * Mathf.Pow(shotTime, 2)) + (desiredY - currentY)) / shotTime;
+    }
 
-        //change shotTime based on proximity to hoop and gravity scale to alter arc and add error
-        shotTime = (-29.43f / mapGrav * Math.Abs(desiredZ - currentZ) / 20f) + 0.6f;
 
-        float zVel = (desiredZ - currentZ) / shotTime;
-
-        return zVel;
+    float CalcZspeed(float currentZ, float desiredZ, float shotTime) {
+        return (desiredZ - currentZ) / shotTime;
     }
 }

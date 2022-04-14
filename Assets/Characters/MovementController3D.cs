@@ -73,11 +73,11 @@ public class MovementController3D : MonoBehaviour {
     const float wallJumpDisableMovementTime = 0.05f;            //Buffer time where player cannot input any movement after wall jumping 
 
     //SLOPE MOVEMENT
-    bool isOnSteepSlope = false;
+    float slopeAngle = 0f;
     float groundRayDistance = 1;
     RaycastHit slopeHit;
-    [SerializeField, Range(0, 90)]
-    float maxGroundAngle = 10f;
+    float minGroundAngle = 1f;
+    float maxGroundAngle = 45f;
 
     enum FacingDirection {
         RIGHT = 0,
@@ -122,7 +122,7 @@ public class MovementController3D : MonoBehaviour {
             lastGroundedTime = Time.realtimeSinceStartup;
             isWallJumping = false;
             isJumping = false;
-            isOnSteepSlope = OnSteepSlope();
+            measureSlopeAngle();
 
             if (!wasGrounded) {
                 OnLandEvent.Invoke();
@@ -206,15 +206,11 @@ public class MovementController3D : MonoBehaviour {
         canMove = true;
     }
 
-    bool OnSteepSlope() {
-        bool onSteepSlope = false;
-
+    float measureSlopeAngle() {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (pController.collisionController.getCapsuleCollider().height) / 2 + groundRayDistance)) {
-            float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
-            if (slopeAngle >= maxGroundAngle)
-                onSteepSlope = true;
+            slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
         }
-        return onSteepSlope;
+        return slopeAngle;
     }
 
     Vector3 getSlopeDirection() {
@@ -232,19 +228,23 @@ public class MovementController3D : MonoBehaviour {
         float ZYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.z));
 
         // Flat ground is seen as 90 degrees but should be zero, so translate it to zero if between 89 - 90 degrees
-        if (XYangle > 1.55334 && XYangle < 1.58825) { XYangle = 0f; }
-        if (ZYangle > 1.55334 && ZYangle < 1.58825) { ZYangle = 0f; }
+        if (isInRange(XYangle, 1.55334f, 1.58825f)) { XYangle = 0f; }
+        if (isInRange(ZYangle, 1.55334f, 1.58825f)) { ZYangle = 0f; }
 
         //The Y velocity only cares about which angle is greater, so base Y on larger values
         float largerAngle = ZYangle >= XYangle ? ZYangle : XYangle;
         float yMovementBasis = XYangle >= ZYangle ? movementVector.x : movementVector.z;
 
         //Set X, Y, Z magnitudes based on the slope
-        resultant.x += Mathf.Abs(yMovementBasis) * Mathf.Sin(largerAngle);
+        resultant.y += Mathf.Abs(yMovementBasis) * Mathf.Sin(largerAngle);
         resultant.x *= Mathf.Cos(XYangle);
         resultant.z *= Mathf.Cos(ZYangle);
 
         return resultant;
+    }
+
+    bool isInRange(float value, float lowerBound, float upperBound) {
+        return value >= lowerBound && value <= upperBound;
     }
     
     public void Move() {
@@ -259,13 +259,14 @@ public class MovementController3D : MonoBehaviour {
                 // increase the speed by the sprint multiplier
                 Vector2 clampedJoystick = Vector2.ClampMagnitude(rawJoystickInput, 1f).normalized;
                 Vector3 transformedClampedJoystick = new Vector3(clampedJoystick.x, 0f, clampedJoystick.y);
-                movementVector += transformedClampedJoystick * movementStats.sprintMultiplier;
+                movementVector.x += transformedClampedJoystick.x * movementStats.sprintMultiplier;
+                movementVector.z += transformedClampedJoystick.z * movementStats.sprintMultiplier;
             }
 
-            if (!isOnSteepSlope) {
+            if (isInRange(slopeAngle, minGroundAngle, maxGroundAngle)) {
                 //Adjust movement based on the slope the character is on to allow for same speed regardless of slope
                 movementVector = adjustMovementForSlope(movementVector);
-            } else {
+            } else if (slopeAngle >= maxGroundAngle){
                 //SLIDE
                 movementVector = getSlopeDirection() * -7f;
                 movementVector.y -= slopeHit.point.y;

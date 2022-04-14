@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     public SphereCollider physicsCollider;
     public SpriteRenderer spriteRenderer;
     GameObject playerWithPossesion = null;
-    float gravScale = 1;
+    float gravScale = 0.1f;
     bool deadBall = false;
 
     public void ApplyForce(Vector3 velocityVector) {
@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    public void SetGravityScale(bool state) {
+    public void SetUsingGravity(bool state) {
         rb.useGravity = state;
     }
 
