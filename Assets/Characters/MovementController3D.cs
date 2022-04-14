@@ -221,6 +221,31 @@ public class MovementController3D : MonoBehaviour {
         return Vector3.up - slopeHit.normal * Vector3.Dot(Vector3.up, slopeHit.normal);
     }
 
+    Vector3 adjustMovementForSlope(Vector3 moveVector) {
+        Vector3 resultant = moveVector;
+        
+        //ADJUST movement to align with slope
+        Vector3 slopeVector = getSlopeDirection();
+
+        //Get slopes in XY plane and ZY plane
+        float XYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.x));
+        float ZYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.z));
+
+        // Flat ground is seen as 90 degrees but should be zero, so translate it to zero if between 89 - 90 degrees
+        if (XYangle > 1.55334 && XYangle < 1.58825) { XYangle = 0f; }
+        if (ZYangle > 1.55334 && ZYangle < 1.58825) { ZYangle = 0f; }
+
+        //The Y velocity only cares about which angle is greater, so base Y on larger values
+        float largerAngle = ZYangle >= XYangle ? ZYangle : XYangle;
+        float yMovementBasis = XYangle >= ZYangle ? movementVector.x : movementVector.z;
+
+        //Set X, Y, Z magnitudes based on the slope
+        resultant.x += Mathf.Abs(yMovementBasis) * Mathf.Sin(largerAngle);
+        resultant.x *= Mathf.Cos(XYangle);
+        resultant.z *= Mathf.Cos(ZYangle);
+
+        return resultant;
+    }
     
     public void Move() {
 
@@ -238,23 +263,8 @@ public class MovementController3D : MonoBehaviour {
             }
 
             if (!isOnSteepSlope) {
-                //ADJUST movement to align with slope
-                Vector3 slopeVector = getSlopeDirection();
-
-                //Get slopes in XY plane and ZY plane
-                float XYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.x));
-                float ZYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.z));
-                // Flat ground is seen as 90 degrees but should be zero, so translate it to zero if between 89 - 90 degrees
-                if (XYangle > 1.55334 && XYangle < 1.58825) { XYangle = 0f; }
-                if (ZYangle > 1.55334 && ZYangle < 1.58825) { ZYangle = 0f; }
-                //The Y velocity only cares about which angle is greater, so base Y on larger values
-                float largerAngle = ZYangle >= XYangle ? ZYangle : XYangle;
-                float yMovementBasis = XYangle >= ZYangle ? movementVector.x : movementVector.z;
-
-                movementVector.y += Mathf.Abs(yMovementBasis) * Mathf.Sin(largerAngle);
-                movementVector.x *= Mathf.Cos(XYangle);
-                movementVector.z *= Mathf.Cos(ZYangle);
-                //Debug.Log("XY: " + XYangle * Mathf.Rad2Deg + "  ZY:  " + ZYangle * Mathf.Rad2Deg + "  SLOPE VECTOR: " + getSlopeDirection() + " Y modifier: " + Mathf.Sin(largerAngle));
+                //Adjust movement based on the slope the character is on to allow for same speed regardless of slope
+                movementVector = adjustMovementForSlope(movementVector);
             } else {
                 //SLIDE
                 movementVector = getSlopeDirection() * -7f;
