@@ -380,6 +380,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4867832780246297231, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867832780246297231, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.17
+      objectReference: {fileID: 0}
     - target: {fileID: 6270651279411018247, guid: d1f931c6fc044f1428d2da67c4a41745,
         type: 3}
       propertyPath: m_Name
@@ -438,6 +448,21 @@ PrefabInstance:
     - target: {fileID: 6270651279411018251, guid: d1f931c6fc044f1428d2da67c4a41745,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891775129754147412, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871608321765236440, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117369326651691918, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1310,6 +1335,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 262b9d493d4b1e44b8de3713a4dd0f9d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45d6e970512ba54489ef58e613471b73, type: 3}
+--- !u!135 &1631550770 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 9198635582314359414, guid: d1f931c6fc044f1428d2da67c4a41745,
+    type: 3}
+  m_PrefabInstance: {fileID: 281639276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1632040495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1728,7 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   m_CapsuleColliders: []
   m_SphereColliders:
-  - first: {fileID: 0}
+  - first: {fileID: 1631550770}
     second: {fileID: 0}
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 0.2
