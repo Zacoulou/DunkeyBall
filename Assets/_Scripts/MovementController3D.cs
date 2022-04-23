@@ -77,7 +77,7 @@ public class MovementController3D : MonoBehaviour {
     float groundRayDistance = 1;
     RaycastHit slopeHit;
     float minGroundAngle = 1f;
-    float maxGroundAngle = 45f;
+    float maxGroundAngle = 40f;
 
     enum FacingDirection {
         RIGHT = 0,
@@ -213,15 +213,18 @@ public class MovementController3D : MonoBehaviour {
         return slopeAngle;
     }
 
-    Vector3 getSlopeDirection() {
-        return Vector3.up - slopeHit.normal * Vector3.Dot(Vector3.up, slopeHit.normal);
+    Vector3 getSlopeDirection(Vector3 moveVector) {
+        moveVector = new Vector3(moveVector.x, 0f, moveVector.z);
+        Vector3 slopeVector = Vector3.ProjectOnPlane(moveVector, slopeHit.normal);
+
+        return slopeVector;
     }
 
     Vector3 adjustMovementForSlope(Vector3 moveVector) {
         Vector3 resultant = moveVector;
         
         //ADJUST movement to align with slope
-        Vector3 slopeVector = getSlopeDirection();
+        Vector3 slopeVector = getSlopeDirection(moveVector);
 
         //Get slopes in XY plane and ZY plane
         float XYangle = Mathf.Atan2(slopeVector.y, Mathf.Abs(slopeVector.x));
@@ -263,13 +266,12 @@ public class MovementController3D : MonoBehaviour {
                 movementVector.z += transformedClampedJoystick.z * movementStats.sprintMultiplier;
             }
 
+            //Adjust movement based on the slope the character is on to allow for same speed regardless of slope
             if (isInRange(slopeAngle, minGroundAngle, maxGroundAngle)) {
-                //Adjust movement based on the slope the character is on to allow for same speed regardless of slope
                 movementVector = adjustMovementForSlope(movementVector);
             } else if (slopeAngle >= maxGroundAngle){
                 //SLIDE
-                movementVector = getSlopeDirection() * -7f;
-                movementVector.y -= slopeHit.point.y;
+                movementVector = getSlopeDirection(movementVector).normalized * -3f;
             }
 
             //REGULAR MOVEMENT
