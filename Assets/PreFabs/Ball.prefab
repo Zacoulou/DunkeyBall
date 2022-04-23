@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6264a15d0db5f3248beb3cab69004711, type: 2}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5059,8 +5059,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6270651279411018251}
   - component: {fileID: 4716081468564265596}
-  - component: {fileID: 5476494668067339887}
-  - component: {fileID: 6800074028150393081}
+  - component: {fileID: 1743441099053533418}
+  - component: {fileID: 6298646803336531822}
   m_Layer: 10
   m_Name: Ball
   m_TagString: Ball
@@ -5097,11 +5097,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ccde2a6ded62e428f3f1105829bea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 5476494668067339887}
+  rb: {fileID: 1743441099053533418}
   inRangeCollider: {fileID: 4688582697220837625}
   physicsCollider: {fileID: 9198635582314359414}
   spriteRenderer: {fileID: 6891775129754147412}
---- !u!54 &5476494668067339887
+  spriteTransform: {fileID: 4867832780246297231}
+--- !u!54 &1743441099053533418
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5115,9 +5116,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &6800074028150393081
+--- !u!114 &6298646803336531822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

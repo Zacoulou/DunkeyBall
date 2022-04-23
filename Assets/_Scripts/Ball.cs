@@ -51,13 +51,12 @@ public class Ball : MonoBehaviour
         float minRotation = -15f;
         float maxRotation = 15f;
 
+        spriteTransform.eulerAngles = new Vector3(0f, 0f, spriteTransform.eulerAngles.z);
+
         float rotTarget = 0f;
         if (rb.velocity.x != 0f || rb.velocity.z != 0f) {
             rotTarget = Mathf.Clamp(Mathf.Atan(rb.velocity.z / rb.velocity.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
         }
-        //if (rb.velocity.x == 0f && currFacingDirection == FacingDirection.LEFT) {
-        //    rotTarget *= -1f;
-        //}
 
         spriteTransform.LeanRotateY(rotTarget, rotateTime);
 

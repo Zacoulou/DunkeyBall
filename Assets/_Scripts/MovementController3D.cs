@@ -487,7 +487,6 @@ public class MovementController3D : MonoBehaviour {
         }
 
         SpritesTransform.LeanRotateY(rotTarget, rotateTime);
-
     }
 
     public void OnStartSprint() {
