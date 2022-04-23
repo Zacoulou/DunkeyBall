@@ -6196,7 +6196,6 @@ GameObject:
   - component: {fileID: 5837359460340006416}
   - component: {fileID: 5854561619907430989}
   - component: {fileID: 7783393505073158811}
-  - component: {fileID: 3502538184605032539}
   - component: {fileID: 7902023763592915733}
   m_Layer: 8
   m_Name: Player
@@ -6470,19 +6469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 5
---- !u!65 &3502538184605032539
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3382727447316845733}
-  m_Material: {fileID: 13400000, guid: 5ea826a623d1d604a9cd78b0cdaa9a6f, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.37, y: 1, z: 0.37}
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &7902023763592915733
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class MovementController3D : MonoBehaviour {
 
     //WALL
     [SerializeField] Transform wallCheck;                       //A position marking where to check if the player is touching a wall
-    Vector2 wallCheckDimensions = new Vector2(0.05f, 0.7f);     //dimensions of overlap rectangle to determine if touching a wall
+    Vector3 wallCheckDimensions = new Vector3(0.05f, 0.5f, 0.2f);     //dimensions of overlap rectangle to determine if touching a wall
     bool isTouchingWall;
     
     //WALL SLIDING
@@ -373,6 +373,7 @@ public class MovementController3D : MonoBehaviour {
     }
 
     private void Jump() {
+        Debug.Log(pController.rb.velocity.y);
         if (CheckJumpBuffer() && !isJumping && !isWallJumping && CheckCoyoteTime()) {
             bool isMovingJoystickDown = rawJoystickInput.y <= -joystickMovementDeadzone;
             Collider[] oneWayColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, OneWayPlatformLayerMask);
@@ -382,7 +383,9 @@ public class MovementController3D : MonoBehaviour {
                 isJumping = true;
                 variableJumpForce = movementStats.jumpForce * minimumJumpForceMultiplier;
                 totalJumpForce = variableJumpForce;
+                pController.rb.velocity = new Vector3(pController.rb.velocity.x, 0f, pController.rb.velocity.z);
                 pController.rb.AddForce(new Vector2(0f, variableJumpForce * pController.rb.mass / Time.timeScale));
+                
             } else {
                 Collider[] groundColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayerMask);
  
