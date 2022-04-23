@@ -54,7 +54,7 @@ public class MovementController3D : MonoBehaviour {
 
     //WALL
     [SerializeField] Transform wallCheck;                       //A position marking where to check if the player is touching a wall
-    Vector3 wallCheckDimensions = new Vector3(0.05f, 0.5f, 0.2f);     //dimensions of overlap rectangle to determine if touching a wall
+    Vector3 wallCheckBox = new Vector3(0.05f, 0.5f, 0.2f);      //dimensions of overlap rectangle to determine if touching a wall
     bool isTouchingWall;
     
     //WALL SLIDING
@@ -67,7 +67,7 @@ public class MovementController3D : MonoBehaviour {
     int wallTimerCheckStage = 0;                                //State for checking wall slide timers
         
     //WALL JUMP
-    float wallJumpDirection = -1f;                              //Direction player should wall jump in (opposite of facing direction)
+    float inverseMovementDir = -1f;                              //Direction player should wall jump in (opposite of facing direction)
     Vector2 wallJumpAngle = new Vector2(1f, 3f);                //Angle of wall jump (This needs to be normalized before use)
     bool isWallJumping = false;                                 //Whether or not the character is currently mid walljump
     const float wallJumpDisableMovementTime = 0.05f;            //Buffer time where player cannot input any movement after wall jumping 
@@ -78,6 +78,9 @@ public class MovementController3D : MonoBehaviour {
     RaycastHit slopeHit;
     float minGroundAngle = 1f;
     float maxGroundAngle = 40f;
+
+    //Character Rotation
+    [SerializeField] private Transform SpritesTransform;
 
     enum FacingDirection {
         RIGHT = 0,
@@ -108,6 +111,7 @@ public class MovementController3D : MonoBehaviour {
         WallJump();
         Jump();
         Move();
+        RotateToFaceMovementDirection();
     }
 
     // The player is grounded if a cast to the groundcheck position hits anything designated as ground
@@ -136,7 +140,7 @@ public class MovementController3D : MonoBehaviour {
     // The player is can wallslide if a cast to the wallCheck position hits anything designated as ground
     void CheckTouchingWall() {
         isTouchingWall = false;
-        Collider[] colliders = Physics.OverlapBox(wallCheck.position, wallCheckDimensions, Quaternion.identity, groundLayerMask);
+        Collider[] colliders = Physics.OverlapBox(wallCheck.position, wallCheckBox, Quaternion.identity, groundLayerMask);
         if (colliders.Length > 0) {
             isTouchingWall = true;
         }
@@ -169,8 +173,8 @@ public class MovementController3D : MonoBehaviour {
             //Check for player input to start timer
             if (wallTimerCheckStage == 2) {
                 //Same direction as wall jump
-                if ((wallJumpDirection == 1 && rawJoystickInput.x >= joystickMovementDeadzone) ||
-                    (wallJumpDirection == -1 && rawJoystickInput.x <= -joystickMovementDeadzone)) 
+                if ((inverseMovementDir == 1 && rawJoystickInput.x >= joystickMovementDeadzone) ||
+                    (inverseMovementDir == -1 && rawJoystickInput.x <= -joystickMovementDeadzone)) 
                 {
                     attemptToLeaveWallTimeStamp = Time.realtimeSinceStartup;
                     wallTimerCheckStage = 3;
@@ -194,7 +198,7 @@ public class MovementController3D : MonoBehaviour {
             isHoldingJump = true;
             variableJumpForce = movementStats.jumpForce * minimumJumpForceMultiplier; ;
             totalJumpForce = variableJumpForce;
-            float xForce = wallJumpAngle.x * variableJumpForce * pController.rb.mass / Time.timeScale * wallJumpDirection;
+            float xForce = wallJumpAngle.x * variableJumpForce * pController.rb.mass / Time.timeScale * inverseMovementDir;
             float yForce = wallJumpAngle.y * variableJumpForce * pController.rb.mass / Time.timeScale;
             pController.rb.AddForce(new Vector2(xForce, yForce));
         }
@@ -320,7 +324,7 @@ public class MovementController3D : MonoBehaviour {
         //Allow the jump height to vary based on how long button is held
         if (!grounded && isHoldingJump && CheckLastJumpInputTime()) {
             if (isWallJumping && pressingJump) {
-                AddJumpHeight(movementStats.jumpForce, new Vector2(wallJumpAngle.x*wallJumpDirection, wallJumpAngle.y));
+                AddJumpHeight(movementStats.jumpForce, new Vector2(wallJumpAngle.x*inverseMovementDir, wallJumpAngle.y));
             } else if (pressingJump) {
                 AddJumpHeight(movementStats.jumpForce, new Vector2(0f, 1f));
             }
@@ -338,12 +342,12 @@ public class MovementController3D : MonoBehaviour {
         currFacingDirection = direction;
         switch (direction) {
             case FacingDirection.LEFT:
-                wallJumpDirection = 1;
+                inverseMovementDir = 1;
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 break;
 
             case FacingDirection.RIGHT:
-                wallJumpDirection = -1;
+                inverseMovementDir = -1;
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 break;
 
@@ -351,10 +355,7 @@ public class MovementController3D : MonoBehaviour {
                 Debug.Log("Not a valid turn direction " + direction);
                 break;
         }
-        
-        
     }
-
 
     void InitiateSmooveMove(float increment, float duration) {
         smooveMove = true;
@@ -373,7 +374,6 @@ public class MovementController3D : MonoBehaviour {
     }
 
     private void Jump() {
-        Debug.Log(pController.rb.velocity.y);
         if (CheckJumpBuffer() && !isJumping && !isWallJumping && CheckCoyoteTime()) {
             bool isMovingJoystickDown = rawJoystickInput.y <= -joystickMovementDeadzone;
             Collider[] oneWayColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, OneWayPlatformLayerMask);
@@ -460,13 +460,34 @@ public class MovementController3D : MonoBehaviour {
         if (movementVect.x >= -1 * joystickMovementDeadzone && movementVect.x <= joystickMovementDeadzone)
             movementVect.x = 0f;
 
+        if (movementVect.y >= -1 * joystickMovementDeadzone && movementVect.y <= joystickMovementDeadzone)
+            movementVect.y = 0f;
+
         if (smooveMove) {
             //Account for player's current momentum
             rawJoystickInput.x = Mathf.Clamp((pController.rb.velocity.x / 4f) + movementVect.x * smooveIncrement, -1f, 1f);
+            rawJoystickInput.y = Mathf.Clamp((pController.rb.velocity.z / 4f) + movementVect.y * smooveIncrement, -1f, 1f);
         } else {
             //Use direct input
             rawJoystickInput = movementVect;
         }
+    }
+
+    void RotateToFaceMovementDirection() {
+        float rotateTime = 0.05f;
+        float minRotation = -15f;
+        float maxRotation = 15f;
+
+        float rotTarget = 0f;
+        if (movementVector.x != 0f || movementVector.z != 0f) {
+            rotTarget = Mathf.Clamp(Mathf.Atan(movementVector.z / movementVector.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
+        }
+        if (movementVector.x == 0f && currFacingDirection == FacingDirection.LEFT) {
+            rotTarget *= -1f;
+        }
+
+        SpritesTransform.LeanRotateY(rotTarget, rotateTime);
+
     }
 
     public void OnStartSprint() {
@@ -498,6 +519,6 @@ public class MovementController3D : MonoBehaviour {
         Gizmos.DrawSphere(groundCheck.position, groundCheckRadius);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(wallCheck.position, wallCheckDimensions);
+        Gizmos.DrawCube(wallCheck.position, wallCheckBox);
     }
 }

@@ -7,9 +7,14 @@ public class Ball : MonoBehaviour
     public SphereCollider inRangeCollider;
     public SphereCollider physicsCollider;
     public SpriteRenderer spriteRenderer;
+    [SerializeField] private Transform spriteTransform;
     GameObject playerWithPossesion = null;
     float gravScale = 0.1f;
     bool deadBall = false;
+
+    private void FixedUpdate() {
+        RotateToFaceMovementDirection();
+    }
 
     public void ApplyForce(Vector3 velocityVector) {
         rb.velocity = velocityVector;
@@ -39,6 +44,23 @@ public class Ball : MonoBehaviour
 
     public void SetDeadBall() {
         deadBall = true;
+    }
+
+    void RotateToFaceMovementDirection() {
+        float rotateTime = 0.05f;
+        float minRotation = -15f;
+        float maxRotation = 15f;
+
+        float rotTarget = 0f;
+        if (rb.velocity.x != 0f || rb.velocity.z != 0f) {
+            rotTarget = Mathf.Clamp(Mathf.Atan(rb.velocity.z / rb.velocity.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
+        }
+        //if (rb.velocity.x == 0f && currFacingDirection == FacingDirection.LEFT) {
+        //    rotTarget *= -1f;
+        //}
+
+        spriteTransform.LeanRotateY(rotTarget, rotateTime);
+
     }
 
     private void OnCollisionEnter(Collision collision) {
