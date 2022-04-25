@@ -54,7 +54,10 @@ public class ShootBall : MonoBehaviour
                 }
 
                 Vector3 shotPosition = SelectShotPositionBasedOnReleaseTiming(releaseTiming, hoop.centerBasket.position);
-                Vector3 shotVector = CalculateShotVector(releaseTiming, shotPosition);                
+                float shotAngle = 45f;
+                float initialyVel = 0f;
+                Vector3 shotVector = CalculateShotVector(shotAngle, initialyVel, shotPosition);   
+                
                 //Debug.Log(releaseTiming + " | " + xVel + " | " + yVel + " | " + zVel);
 
                 //move ball to shot release position
@@ -100,41 +103,68 @@ public class ShootBall : MonoBehaviour
         Vector2 shotErrorPoint2D = UnityEngine.Random.insideUnitCircle*shotErrorRadius;
         Vector3 shotErrorPoint = new Vector3(shotErrorPoint2D.x, 0f, shotErrorPoint2D.y);
 
-        Debug.Log("Shot ERROR Radius: " + shotErrorRadius);
+        //Debug.Log("Shot ERROR Radius: " + shotErrorRadius);
         Debug.DrawRay(desiredPosition + shotErrorPoint, Vector3.up, Color.white, 5f);
         Debug.DrawRay(desiredPosition, Vector3.left * shotErrorRadius, Color.blue, 5f);
 
         return desiredPosition + shotErrorPoint;
     }
 
-    Vector3 CalculateShotVector(float releaseTiming, Vector3 desiredPosition) {
-        Vector3 shotVector = new Vector3(0,0,0);
+    //Vector3 CalculateShotVector(float releaseTiming, Vector3 desiredPosition) {
+    //    Vector3 shotVector = new Vector3(0,0,0);
+    //    float currentX = shotReleasePoint.position.x;
+    //    float currentY = shotReleasePoint.position.y;
+    //    float currentZ = shotReleasePoint.position.z;
+
+    //    //change shotTime based on proximity to hoop and gravity scale to alter arc and add error
+    //    float shotTime = Vector3.Distance(shotReleasePoint.position, desiredPosition) / 8f;
+    //    shotTime = Mathf.Clamp(shotTime, 0.8f, 1.5f);
+
+    //    shotVector.x = CalcXspeed(currentX, desiredPosition.x, shotTime);
+    //    shotVector.y = CalcYspeed(currentY, desiredPosition.y, shotTime);
+    //    shotVector.z = CalcZspeed(currentZ, desiredPosition.z, shotTime);
+
+    //    return shotVector;
+    //}
+
+    Vector3 CalculateShotVector(float angleDeg, float initialVel, Vector3 desiredPosition) {
+        float angleRad = angleDeg * Mathf.Deg2Rad;
+        Vector3 shotVector = new Vector3(0, 0, 0);
         float currentX = shotReleasePoint.position.x;
         float currentY = shotReleasePoint.position.y;
         float currentZ = shotReleasePoint.position.z;
 
-        //change shotTime based on proximity to hoop and gravity scale to alter arc and add error
-        float shotTime = Vector3.Distance(shotReleasePoint.position, desiredPosition) / 8f;
-        shotTime = Mathf.Clamp(shotTime, 0.8f, 2f);
+        float deltaX = desiredPosition.x - currentX;
+        float deltaY = desiredPosition.y - currentY;
+        float deltaZ = desiredPosition.z - currentZ;
 
-        shotVector.x = CalcXspeed(currentX, desiredPosition.x, shotTime);
-        shotVector.y = CalcYspeed(currentY, desiredPosition.y, shotTime);
-        shotVector.z = CalcZspeed(currentZ, desiredPosition.z, shotTime);
+        float numerator = Mathf.Pow(deltaX, 2) * Mathf.Pow(Mathf.Tan(angleRad), 2) + Mathf.Pow(deltaZ, 2) * Mathf.Pow(Mathf.Tan(angleRad), 2);
+        float denominator = Mathf.Pow(initialVel, 2) + (2 * ballGravity * initialVel) + Mathf.Pow(ballGravity, 2);
+        float shotTime = Mathf.Pow( numerator/denominator , 1f / 4f);
+
+        shotVector.x = CalcXspeed(deltaX, shotTime);
+        shotVector.y = -CalcYspeed(initialVel, shotTime);
+        shotVector.z = CalcZspeed(deltaZ, shotTime);
+
+        float xzMagnitude = Mathf.Sqrt(Mathf.Pow(shotVector.x, 2) + Mathf.Pow(shotVector.z, 2));
+        float finalAngle = Mathf.Atan(shotVector.y / xzMagnitude);
+        Debug.Log("ShotTime: " + shotTime + "Angle: " + finalAngle * Mathf.Rad2Deg);
+        Debug.DrawRay(shotReleasePoint.position, shotVector, Color.white, 5f);
 
         return shotVector;
     }
 
-    float CalcXspeed(float currentX, float desiredX, float shotTime) {
-        return (desiredX - currentX) / shotTime; 
+    float CalcXspeed(float deltaX, float shotTime) {
+        return deltaX / shotTime; 
     }
 
 
-    float CalcYspeed(float currentY, float desiredY, float shotTime) {
-        return ((0.5f * -ballGravity * Mathf.Pow(shotTime, 2)) + (desiredY - currentY)) / shotTime;
+    float CalcYspeed(float initialYVel, float shotTime) {
+        return (ballGravity * shotTime) + (initialYVel * shotTime);
     }
 
 
-    float CalcZspeed(float currentZ, float desiredZ, float shotTime) {
-        return (desiredZ - currentZ) / shotTime;
+    float CalcZspeed(float deltaZ, float shotTime) {
+        return deltaZ / shotTime;
     }
 }
