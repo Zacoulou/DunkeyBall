@@ -50,11 +50,11 @@ public class ShootBall : MonoBehaviour
 
                 if (releaseTiming >= 0.9f) {
                     releaseTiming = 1f;
-                    //Debug.Log("Perfect Shot!");
+                    Debug.Log("Perfect Shot!");
                 }
 
-                Vector3 shotVector = CalculateShotVector(releaseTiming, hoop.centerBasket.position);
-
+                Vector3 shotPosition = SelectShotPositionBasedOnReleaseTiming(releaseTiming, hoop.centerBasket.position);
+                Vector3 shotVector = CalculateShotVector(releaseTiming, shotPosition);                
                 //Debug.Log(releaseTiming + " | " + xVel + " | " + yVel + " | " + zVel);
 
                 //move ball to shot release position
@@ -63,7 +63,6 @@ public class ShootBall : MonoBehaviour
 
                 //Apply calculated x and y velocity components to ball
                 ball.ApplyForce(shotVector);
-
 
                 //Apply backspin to shot depending on direction of shot
                 if (shotReleasePoint.position.x < hoop.centerBasket.position.x) {
@@ -80,8 +79,32 @@ public class ShootBall : MonoBehaviour
     public bool GetIsAiming() {
         return isAiming;
     }
+
     float ApplyErrorTo(float value, float error) {
         return value * UnityEngine.Random.Range(1f - error, 1f + error);
+    }
+
+    public Vector3 GetPointOnUnitCircleCircumference(float radius) {
+        float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * radius*2);
+        return new Vector3(Mathf.Sin(randomAngle), 0f, Mathf.Cos(randomAngle)).normalized;
+    }
+
+    Vector3 SelectShotPositionBasedOnReleaseTiming(float releaseTiming, Vector3 desiredPosition) {
+        //float minShotErrorRadius = 0f; // A perfect shot would fall into this circle
+        float rimRadius = 1f;
+        float maxErrorMultiplier = 2f;
+        float maxErrorRadius = rimRadius * maxErrorMultiplier; 
+        float shotErrorRadius = (1 - releaseTiming) * maxErrorRadius;
+
+        //Vector3 shotErrorPoint = GetPointOnUnitCircleCircumference(shotErrorRadius);
+        Vector2 shotErrorPoint2D = UnityEngine.Random.insideUnitCircle*shotErrorRadius;
+        Vector3 shotErrorPoint = new Vector3(shotErrorPoint2D.x, 0f, shotErrorPoint2D.y);
+
+        Debug.Log("Shot ERROR Radius: " + shotErrorRadius);
+        Debug.DrawRay(desiredPosition + shotErrorPoint, Vector3.up, Color.white, 5f);
+        Debug.DrawRay(desiredPosition, Vector3.left * shotErrorRadius, Color.blue, 5f);
+
+        return desiredPosition + shotErrorPoint;
     }
 
     Vector3 CalculateShotVector(float releaseTiming, Vector3 desiredPosition) {
