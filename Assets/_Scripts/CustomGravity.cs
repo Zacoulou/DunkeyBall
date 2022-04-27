@@ -14,7 +14,7 @@ public class CustomGravity : MonoBehaviour
     // Global Gravity doesn't appear in the inspector. Modify it here in the code
     // (or via scripting) to define a different default gravity for all objects.
 
-    public static float globalGravity = -9.81f;
+    public static float globalGravity = -50f;
 
     Rigidbody m_rb;
 

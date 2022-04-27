@@ -41,7 +41,7 @@ public class HoopController : MonoBehaviour
 
     void RegisterPoints() {
         //AudioManager.instance.Play("Swish");
-        Debug.Log("THAT'S A GOSH DARN BUCKET BROTHER!!!");
+        //Debug.Log("THAT'S A GOSH DARN BUCKET BROTHER!!!");
         hasEntered = false;
         hasExit = false;
 

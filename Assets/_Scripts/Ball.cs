@@ -9,7 +9,6 @@ public class Ball : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [SerializeField] private Transform spriteTransform;
     GameObject playerWithPossesion = null;
-    float gravScale = 0.1f;
     bool deadBall = false;
 
     private void FixedUpdate() {
