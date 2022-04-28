@@ -92,7 +92,7 @@ public class MovementController3D : MonoBehaviour {
     }
 
     void SetPosition(Vector2 pos, FacingDirection direction) {
-        this.gameObject.transform.position = pos;
+        gameObject.transform.position = pos;
         Flip(direction);
     }
 
@@ -300,22 +300,28 @@ public class MovementController3D : MonoBehaviour {
             }
 
             //FACING DIRECTION
-            if ((rawJoystickInput.x >= joystickMovementDeadzone) || (rawJoystickInput.x <= -joystickMovementDeadzone)) {
-                //base direciton on input direction
-                if (rawJoystickInput.x > 0 && (currFacingDirection != FacingDirection.RIGHT)) {
-                    Flip(FacingDirection.RIGHT);
-                } else if (rawJoystickInput.x < 0 && (currFacingDirection != FacingDirection.LEFT)) {
-                    Flip(FacingDirection.LEFT);
-                }
-                
+            if (pController.stateController.GetCurrentState() == PlayerStateController.PlayerStates.SHOOTING) {
+                //base direction on relation to hoop
+                if (pController.shootBall.GetXSideOfHoop() == 1) { Flip(FacingDirection.RIGHT); }
+                else if (pController.shootBall.GetXSideOfHoop() == -1) { Flip(FacingDirection.LEFT); }
             } else {
-                //base direction on movement direction
-                if (pController.rb.velocity.x > joystickMovementDeadzone && (currFacingDirection != FacingDirection.RIGHT)) {
-                    Flip(FacingDirection.RIGHT);
-                } else if (pController.rb.velocity.x < -joystickMovementDeadzone && (currFacingDirection != FacingDirection.LEFT)) {
-                    Flip(FacingDirection.LEFT);
+                if ((rawJoystickInput.x >= joystickMovementDeadzone) || (rawJoystickInput.x <= -joystickMovementDeadzone)) {
+                    //base direciton on input direction
+                    if (rawJoystickInput.x > 0 && (currFacingDirection != FacingDirection.RIGHT)) {
+                        Flip(FacingDirection.RIGHT);
+                    } else if (rawJoystickInput.x < 0 && (currFacingDirection != FacingDirection.LEFT)) {
+                        Flip(FacingDirection.LEFT);
+                    }
+                } else {
+                    //base direction on movement direction
+                    if (pController.rb.velocity.x > joystickMovementDeadzone && (currFacingDirection != FacingDirection.RIGHT)) {
+                        Flip(FacingDirection.RIGHT);
+                    } else if (pController.rb.velocity.x < -joystickMovementDeadzone && (currFacingDirection != FacingDirection.LEFT)) {
+                        Flip(FacingDirection.LEFT);
+                    }
                 }
             }
+            
 
         }
     }
@@ -339,21 +345,23 @@ public class MovementController3D : MonoBehaviour {
 
     // Switch the way the player is labelled as facing.
     private void Flip(FacingDirection direction) {
-        currFacingDirection = direction;
-        switch (direction) {
-            case FacingDirection.LEFT:
-                inverseMovementDir = 1;
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                break;
+        if (currFacingDirection != direction) {
+            currFacingDirection = direction;
+            switch (direction) {
+                case FacingDirection.LEFT:
+                    inverseMovementDir = 1;
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    break;
 
-            case FacingDirection.RIGHT:
-                inverseMovementDir = -1;
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                break;
+                case FacingDirection.RIGHT:
+                    inverseMovementDir = -1;
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    break;
 
-            default:
-                Debug.Log("Not a valid turn direction " + direction);
-                break;
+                default:
+                    Debug.Log("Not a valid turn direction " + direction);
+                    break;
+            }
         }
     }
 
@@ -479,12 +487,21 @@ public class MovementController3D : MonoBehaviour {
         float maxRotation = 15f;
 
         float rotTarget = 0f;
-        if (movementVector.x != 0f || movementVector.z != 0f) {
-            rotTarget = Mathf.Clamp(Mathf.Atan(movementVector.z / movementVector.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
+
+        if (pController.stateController.GetCurrentState() == PlayerStateController.PlayerStates.SHOOTING) {
+            Vector3 distanceToHoop = gameObject.transform.position - pController.GetHoop().GetHoopCenterPosition();
+            rotTarget = Mathf.Clamp(Mathf.Atan(distanceToHoop.z / distanceToHoop.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
+        } else {
+            //Player is moving in any direction
+            if (movementVector.x != 0f || movementVector.z != 0f) {
+                rotTarget = Mathf.Clamp(Mathf.Atan(movementVector.z / movementVector.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
+            }
+            //Flip in the case of no xVelocity and player is facing left
+            if (movementVector.x == 0f && currFacingDirection == FacingDirection.LEFT) {
+                rotTarget *= -1f;
+            }
         }
-        if (movementVector.x == 0f && currFacingDirection == FacingDirection.LEFT) {
-            rotTarget *= -1f;
-        }
+        
 
         SpritesTransform.LeanRotateY(rotTarget, rotateTime);
     }

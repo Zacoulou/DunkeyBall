@@ -54,4 +54,8 @@ public class HoopController : MonoBehaviour
 
     }
 
+    public Vector3 GetHoopCenterPosition() {
+        return centerBasket.position;
+    }
+
 }

@@ -11,7 +11,8 @@ public class ShootBall : MonoBehaviour
     bool isAiming = false;
     float ballGravity = 0f;
     Ball ball;
-            
+    HoopController hoop;
+
     //SHOT CHARACTERISTICS
     float minLandAngleDeg           = 40f;                          //Even with a valid trajectory, lower angles will likely bounce off front rim
     Vector2 normalShotMinMaxAngle   = new Vector2(25f, 55f);        //Range of worst timed shot to Best timed shot
@@ -44,7 +45,7 @@ public class ShootBall : MonoBehaviour
     public void ReleaseShot() {
         if (isAiming) {
             Ball ball = pController.GetBallInPossession();
-            HoopController hoop = pController.GetHoop();
+            hoop = pController.GetHoop();
             isAiming = false;
 
             if (ball && hoop) {
@@ -74,14 +75,8 @@ public class ShootBall : MonoBehaviour
                 ball.SetVelocity(shotVector);
 
                 //Apply backspin to shot depending on direction of shot
-                //if (shotReleasePoint.position.x < hoop.centerBasket.position.x) {
-                //    ball.SetAngularVelocity(new Vector3(0f, 0f, backspin));
-                //} else {
-                //    ball.SetAngularVelocity(new Vector3(0f, 0f, -backspin));
-                //}
                 Vector3 normalizedShotVector = shotVector.normalized;
                 ball.SetAngularVelocity(new Vector3(-backspin * normalizedShotVector.z, 0f, backspin * normalizedShotVector.x));
-                Debug.Log(" X: " + backspin * normalizedShotVector.x + " Z " + -backspin * normalizedShotVector.z);
 
                 pController.SetHasBall(false);
             }
@@ -190,4 +185,11 @@ public class ShootBall : MonoBehaviour
         return releaseAngle;
     }
 
+    //Returns 1 if player is to the left, or -1 if player is to the right of the hoop
+    public int GetXSideOfHoop() {
+        int side = 1;
+        if (!hoop) {hoop = pController.GetHoop();}
+        if (hoop.centerBasket.position.x - shotReleasePoint.position.x < 0) { side = -1; }
+        return side;
+    }
 }

@@ -36,6 +36,10 @@ public class PlayerStateController : MonoBehaviour
         GET_UP_BACK
     }
 
+    public PlayerStates GetCurrentState() {
+        return currentState;
+    }
+
     private void SetPlayerState(PlayerStates state) {
         currentState = state;
         pController.playerAnimator.SetAnimationBasedOnPlayerState(state);
@@ -78,7 +82,7 @@ public class PlayerStateController : MonoBehaviour
                 }
             }
         }
-        //MOVING AND grounded: RUNNING OR DRIBBLING
+        //MOVING AND GROUNDED: RUNNING OR DRIBBLING
         else if ((IsMovingX() || IsMovingZ()) && WasGrounded()) {
             if (pController.GetBallInPossession()) {
                 if (pController.movementController.GetIsSprinting())
