@@ -61,7 +61,7 @@ public class ShootBall : MonoBehaviour
                 ball.PositionBall(shotReleasePoint.position);
 
                 //Apply calculated x and y velocity components to ball
-                ball.ApplyForce(shotVector);
+                ball.SetVelocity(shotVector);
 
                 //Apply backspin to shot depending on direction of shot
                 if (shotReleasePoint.position.x < hoop.centerBasket.position.x) {
@@ -110,19 +110,21 @@ public class ShootBall : MonoBehaviour
         Vector3 delta       = desiredPosition - startingPosition;
         Vector3 velocity3D  = Vector3.zero;
         float xzDistance    = Mathf.Sqrt(Mathf.Pow(delta.x, 2) + Mathf.Pow(delta.z, 2));
+
         float angleRad      = angleDeg * Mathf.Deg2Rad;
 
         //Determine if trajectory has a valid solution
-        if (delta.y < xzDistance * Mathf.Tan(angleRad)) {
+        if (delta.y < Mathf.Abs(xzDistance * Mathf.Tan(angleRad))) {
             float speed2D       = Mathf.Sqrt(ballGravity * Mathf.Pow(xzDistance, 2) / (2 * Mathf.Pow(Mathf.Cos(angleRad), 2) * (delta.y - xzDistance * Mathf.Tan(angleRad))));
             float xzMagnitude   = speed2D * Mathf.Cos(angleRad);
             float xzTheta       = Mathf.Atan(delta.z / delta.x);
 
             //Calculate the initial velocity of the ball
             velocity3D = new Vector3(
-                xzMagnitude * Mathf.Cos(xzTheta),
+                xzMagnitude * Mathf.Abs(Mathf.Cos(xzTheta)) * delta.x / Mathf.Abs(delta.x),
                 speed2D     * Mathf.Sin(angleRad),
-                xzMagnitude * Mathf.Sin(xzTheta));
+                xzMagnitude * Mathf.Abs(Mathf.Sin(xzTheta)) * delta.z / Mathf.Abs(delta.z));
+
         } else {
             Debug.Log("IMPOSSIBLE Angle" + delta.y + "  " + xzDistance * Mathf.Tan(angleRad));
         }

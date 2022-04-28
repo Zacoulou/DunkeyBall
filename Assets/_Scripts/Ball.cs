@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour
         RotateToFaceMovementDirection();
     }
 
-    public void ApplyForce(Vector3 velocityVector) {
+    public void SetVelocity(Vector3 velocityVector) {
         rb.velocity = velocityVector;
     }
 
@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
 
     public void SetPlayerWithPossesion(GameObject player) {
         playerWithPossesion = player;
-        ApplyForce(new Vector3(0.0f, 0.0f, 0.0f));
+        SetVelocity(new Vector3(0.0f, 0.0f, 0.0f));
         SetAngularVelocity(new Vector3(0.0f, 0.0f, 0.0f));
 
         if (player != null) {
