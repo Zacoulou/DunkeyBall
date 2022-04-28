@@ -324,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 6270651279411018251, guid: d1f931c6fc044f1428d2da67c4a41745,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6
+      value: -2.98
       objectReference: {fileID: 0}
     - target: {fileID: 6270651279411018251, guid: d1f931c6fc044f1428d2da67c4a41745,
         type: 3}
@@ -376,6 +376,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6891775129754147412, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117369326651691918, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117369326651691918, guid: d1f931c6fc044f1428d2da67c4a41745,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5689e02792912784c815757bab07d5b7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1f931c6fc044f1428d2da67c4a41745, type: 3}
 --- !u!1 &343786862
@@ -1827,6 +1842,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10116765}
     m_Modifications:
+    - target: {fileID: 4060533051208859256, guid: b72b482b258fc324c8a085fac2fa40ae,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060533051208859256, guid: b72b482b258fc324c8a085fac2fa40ae,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060533051208859256, guid: b72b482b258fc324c8a085fac2fa40ae,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391757244132174750, guid: b72b482b258fc324c8a085fac2fa40ae,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.38463005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391757244132174750, guid: b72b482b258fc324c8a085fac2fa40ae,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.38309452
+      objectReference: {fileID: 0}
     - target: {fileID: 4391757244132174752, guid: b72b482b258fc324c8a085fac2fa40ae,
         type: 3}
       propertyPath: m_SphereColliders.Array.data[0].first

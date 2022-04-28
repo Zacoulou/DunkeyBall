@@ -8,10 +8,19 @@ public class ShootBall : MonoBehaviour
     [SerializeField] PlayerController pController;
     [SerializeField] Transform shotReleasePoint;
     [SerializeField] ShotReleaseMeter shotMeter;
-    const float backspin = 500.0f;
     bool isAiming = false;
     float ballGravity = 0f;
     Ball ball;
+            
+    //SHOT CHARACTERISTICS
+    float minLandAngleDeg           = 40f;                          //Even with a valid trajectory, lower angles will likely bounce off front rim
+    Vector2 normalShotMinMaxAngle   = new Vector2(25f, 55f);        //Range of worst timed shot to Best timed shot
+    Vector2 floaterMinMaxAngle      = new Vector2(55f, 70f);        //Range of worst timed shot to Best timed shot
+    const float backspin            = 500.0f;                       //The magnitude of the backspin applied to the ball
+    float minShotErrorRadius        = 0f;                           // A perfect shot would fall into this circle
+    float rimRadius                 = 1f;
+    float maxErrorMultiplier        = 2f;
+
 
     public void OnStartShot() {
         //TimeManager.Instance.StartSlowMotion(2f, 0.1f);
@@ -53,6 +62,7 @@ public class ShootBall : MonoBehaviour
                     //Debug.Log("Perfect Shot!");
                 }
 
+                //Trajectory planning for shot
                 Vector3 shotPosition = SelectShotPositionBasedOnReleaseTiming(releaseTiming, hoop.centerBasket.position);
                 Vector3 shotVector = Shoot(releaseTiming, shotReleasePoint.position, shotPosition);
 
@@ -64,11 +74,14 @@ public class ShootBall : MonoBehaviour
                 ball.SetVelocity(shotVector);
 
                 //Apply backspin to shot depending on direction of shot
-                if (shotReleasePoint.position.x < hoop.centerBasket.position.x) {
-                    ball.SetAngularVelocity(new Vector3(0f, 0f, backspin));
-                } else {
-                    ball.SetAngularVelocity(new Vector3(0f, 0f, -backspin));
-                }
+                //if (shotReleasePoint.position.x < hoop.centerBasket.position.x) {
+                //    ball.SetAngularVelocity(new Vector3(0f, 0f, backspin));
+                //} else {
+                //    ball.SetAngularVelocity(new Vector3(0f, 0f, -backspin));
+                //}
+                Vector3 normalizedShotVector = shotVector.normalized;
+                ball.SetAngularVelocity(new Vector3(-backspin * normalizedShotVector.z, 0f, backspin * normalizedShotVector.x));
+                Debug.Log(" X: " + backspin * normalizedShotVector.x + " Z " + -backspin * normalizedShotVector.z);
 
                 pController.SetHasBall(false);
             }
@@ -89,9 +102,6 @@ public class ShootBall : MonoBehaviour
     }
 
     Vector3 SelectShotPositionBasedOnReleaseTiming(float releaseTiming, Vector3 desiredPosition) {
-        float minShotErrorRadius    = 0f; // A perfect shot would fall into this circle
-        float rimRadius             = 1f;
-        float maxErrorMultiplier    = 2f;
         float maxErrorRadius        = rimRadius * maxErrorMultiplier; 
         float shotErrorRadius       = minShotErrorRadius + (1 - releaseTiming) * maxErrorRadius;
 
@@ -133,14 +143,12 @@ public class ShootBall : MonoBehaviour
     }
 
     Vector3 Shoot(float releaseTiming, Vector3 startingPosition, Vector3 desiredPosition) {
-        float minLandAngleDeg   = 40f;
-        float shotAngle         = 55f;
-
         Vector3 result = Vector3.zero;
         Vector3 delta = desiredPosition - startingPosition;
         float xzDistance = Mathf.Sqrt(Mathf.Pow(delta.x, 2) + Mathf.Pow(delta.z, 2));
 
-        Vector3 velocity3D = CalculateShotVector(shotAngle, startingPosition, desiredPosition);
+        float shotAngleDeg = LaunchAngleBasedOnReleaseTiming(releaseTiming);
+        Vector3 velocity3D = CalculateShotVector(shotAngleDeg, startingPosition, desiredPosition);
 
         if (velocity3D != Vector3.zero) {
             //Trajectory Apex
@@ -160,7 +168,6 @@ public class ShootBall : MonoBehaviour
                 if (isLandingAngleAcceptable) {
                     //REGULAR SHOT. USE Velocity3D
                     result = velocity3D;
-                    Debug.Log("GOOD Landing angle: " + landingAngleRad * Mathf.Rad2Deg);
                 } else {
                     //SHOT DOESN'T MEET MIN LANDING ANGLE... FLOATER?
                     Debug.Log("BAD Landing angle: " + landingAngleRad * Mathf.Rad2Deg);
@@ -172,6 +179,15 @@ public class ShootBall : MonoBehaviour
         }
 
         return result;
-    } 
+    }
+
+    float LaunchAngleBasedOnReleaseTiming(float releaseTiming) {
+        float normalShotAngleRange = normalShotMinMaxAngle.y - normalShotMinMaxAngle.x;
+        //float floaterAngleRange = floaterMinMaxAngle.y - floaterMinMaxAngle.x;
+
+        float releaseAngle = (normalShotMinMaxAngle.x + releaseTiming * normalShotAngleRange);
+        Debug.Log("Release angle: " + releaseAngle);
+        return releaseAngle;
+    }
 
 }
