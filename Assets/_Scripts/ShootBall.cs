@@ -64,7 +64,8 @@ public class ShootBall : MonoBehaviour
                 }
 
                 //Trajectory planning for shot
-                Vector3 shotPosition = SelectShotPositionBasedOnReleaseTiming(releaseTiming, hoop.centerBasket.position);
+                Vector3 improvedShotPosition = CalculateShotOffsetPosition(hoop.centerBasket.position);
+                Vector3 shotPosition = SelectShotErrorPositionBasedOnReleaseTiming(releaseTiming, improvedShotPosition);
                 Vector3 shotVector = Shoot(releaseTiming, shotReleasePoint.position, shotPosition);
 
                 //move ball to shot release position
@@ -91,16 +92,21 @@ public class ShootBall : MonoBehaviour
         return value * UnityEngine.Random.Range(1f - error, 1f + error);
     }
 
-    public Vector3 GetPointOnUnitCircleCircumference(float radius) {
-        float randomAngle = UnityEngine.Random.Range(0f, Mathf.PI * radius*2);
-        return new Vector3(Mathf.Sin(randomAngle), 0f, Mathf.Cos(randomAngle)).normalized;
+    Vector3 CalculateShotOffsetPosition(Vector3 desiredPosition) {
+        Vector3 postionDeltaNormalized = (desiredPosition - shotReleasePoint.position).normalized;
+        float offset = (2f / 9f) * rimRadius;
+        Vector3 shotOffset = new Vector3(
+            desiredPosition.x + postionDeltaNormalized.x * offset,
+            desiredPosition.y,
+            desiredPosition.z + postionDeltaNormalized.z * offset);
+
+        return shotOffset;
     }
 
-    Vector3 SelectShotPositionBasedOnReleaseTiming(float releaseTiming, Vector3 desiredPosition) {
+    Vector3 SelectShotErrorPositionBasedOnReleaseTiming(float releaseTiming, Vector3 desiredPosition) {
         float maxErrorRadius        = rimRadius * maxErrorMultiplier; 
         float shotErrorRadius       = minShotErrorRadius + (1 - releaseTiming) * maxErrorRadius;
 
-        //Vector3 shotErrorPoint = GetPointOnUnitCircleCircumference(shotErrorRadius);
         Vector2 shotErrorPoint2D    = UnityEngine.Random.insideUnitCircle*shotErrorRadius;
         Vector3 shotErrorPoint      = new Vector3(shotErrorPoint2D.x, 0f, shotErrorPoint2D.y);
 
@@ -185,11 +191,4 @@ public class ShootBall : MonoBehaviour
         return releaseAngle;
     }
 
-    //Returns 1 if player is to the left, or -1 if player is to the right of the hoop
-    public int GetXSideOfHoop() {
-        int side = 1;
-        if (!hoop) {hoop = pController.GetHoop();}
-        if (hoop.centerBasket.position.x - shotReleasePoint.position.x < 0) { side = -1; }
-        return side;
-    }
 }

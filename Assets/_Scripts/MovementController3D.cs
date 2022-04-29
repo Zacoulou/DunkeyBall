@@ -302,8 +302,8 @@ public class MovementController3D : MonoBehaviour {
             //FACING DIRECTION
             if (pController.stateController.GetCurrentState() == PlayerStateController.PlayerStates.SHOOTING) {
                 //base direction on relation to hoop
-                if (pController.shootBall.GetXSideOfHoop() == 1) { Flip(FacingDirection.RIGHT); }
-                else if (pController.shootBall.GetXSideOfHoop() == -1) { Flip(FacingDirection.LEFT); }
+                if (GetXSideOfHoop() == 1) { Flip(FacingDirection.RIGHT); }
+                else if (GetXSideOfHoop() == -1) { Flip(FacingDirection.LEFT); }
             } else {
                 if ((rawJoystickInput.x >= joystickMovementDeadzone) || (rawJoystickInput.x <= -joystickMovementDeadzone)) {
                     //base direciton on input direction
@@ -528,6 +528,13 @@ public class MovementController3D : MonoBehaviour {
 
     public bool GetIsSprinting() {
         return isSprinting;
+    }
+
+    //Returns 1 if player is to the left, or -1 if player is to the right of the hoop
+    private int GetXSideOfHoop() {
+        int side = 1;
+        if (pController.GetHoop().GetHoopCenterPosition().x - gameObject.transform.position.x < 0) { side = -1; }
+        return side;
     }
 
     private void OnDrawGizmosSelected() {
