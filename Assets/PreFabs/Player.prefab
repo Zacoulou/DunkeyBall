@@ -5709,7 +5709,6 @@ GameObject:
   - component: {fileID: 4904100994507602204}
   - component: {fileID: 686161869826968511}
   - component: {fileID: 1574380264002677383}
-  - component: {fileID: 485331046665832732}
   m_Layer: 8
   m_Name: TorsoBone
   m_TagString: Untagged
@@ -5749,7 +5748,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 48
   m_CollisionDetection: 0
 --- !u!136 &1574380264002677383
 CapsuleCollider:
@@ -5765,41 +5764,6 @@ CapsuleCollider:
   m_Height: 1.2798585
   m_Direction: 0
   m_Center: {x: 0.3600706, y: 1.564198e-15, z: 0}
---- !u!59 &485331046665832732
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2622814652858170293}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 0, y: 0, z: 1}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.009283448, y: -0.15345512, z: 0}
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 0
-  m_Limits:
-    min: 0
-    max: 0
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &2666709516363116496
 GameObject:
   m_ObjectHideFlags: 0
@@ -6276,6 +6240,7 @@ MonoBehaviour:
   shootBall: {fileID: 8576873818723022205}
   stateController: {fileID: 5605449039766712785}
   collisionController: {fileID: 8237028773780205298}
+  ragdollController: {fileID: 2418121170659721795}
   rb: {fileID: 5837359460340006416}
 --- !u!114 &3382727447316845729
 MonoBehaviour:

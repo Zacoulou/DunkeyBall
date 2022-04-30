@@ -82,7 +82,7 @@ public class MovementController3D : MonoBehaviour {
     //Character Rotation
     [SerializeField] private Transform SpritesTransform;
 
-    enum FacingDirection {
+    public enum FacingDirection {
         RIGHT = 0,
         LEFT = 1
     }
@@ -506,6 +506,10 @@ public class MovementController3D : MonoBehaviour {
         SpritesTransform.LeanRotateY(rotTarget, rotateTime);
     }
 
+    void IgnorePlayerMovementInput() {
+
+    }
+
     public void OnStartSprint() {
         isSprinting = true;
     }
@@ -528,6 +532,10 @@ public class MovementController3D : MonoBehaviour {
 
     public bool GetIsSprinting() {
         return isSprinting;
+    }
+
+    public FacingDirection GetCurrentFacingDirection() {
+        return currFacingDirection;
     }
 
     //Returns 1 if player is to the left, or -1 if player is to the right of the hoop

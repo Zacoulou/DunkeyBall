@@ -256,7 +256,7 @@ public class PlayerMovement : MonoBehaviour {
             if ((Time.realtimeSinceStartup - timeAtSwat >= 0.5f) && playerInfoUI.GetDunkMeterValue() >= swatCost) {
                 DefensiveReach();
             } else if (!rdController.RagdollActive) {
-                rdController.ActivateRagdoll(rb.velocity, facingDirection);
+                //rdController.ActivateRagdoll(rb.velocity, facingDirection);
                 StopPlayer();
                 timeatAtAnklesBroken = Time.realtimeSinceStartup;
                 anklesBroken = true;

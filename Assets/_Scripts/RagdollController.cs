@@ -35,16 +35,9 @@ public class RagdollController : MonoBehaviour {
         }
     }
 
-    public void ActivateRagdoll(Vector2 currVel, string facingDirection = "right") {
+    public void ActivateRagdoll(Vector2 currVel, MovementController3D.FacingDirection facingDirection) {
         //Resets torsoScale to default so scaling from animations does not conflict with transforms
         torsoTransform.localScale = defaultTorsoScale;
-
-        if (currVel.x <= 2f && currVel.x >= -2f) {
-            if (facingDirection.Equals("right"))
-                currVel = new Vector2(-2f, currVel.y);
-            else
-                currVel = new Vector2(2f, currVel.y);
-        }
         
         RagdollActive = true;
         animator.enabled = false;
@@ -55,9 +48,6 @@ public class RagdollController : MonoBehaviour {
             rb.velocity = currVel;
         }
 
-        //foreach (var joint in joints) {
-        //    joint.gameObject.SetActive(true);
-        //}
     }
 
     public void DisableRagdoll() {
@@ -66,14 +56,10 @@ public class RagdollController : MonoBehaviour {
 
         foreach (var rb in rbs) {
             rb.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
-            rb.velocity = Vector2.zero;
-            rb.angularVelocity = new Vector3(0f, 0f, 0f);
         }
-
-        //foreach (var joint in joints) {
-        //    joint.gameObject.SetActive(false);
-        //}
     }
 
     public float GetRagdollRot() {

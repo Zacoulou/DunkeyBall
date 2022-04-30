@@ -6,13 +6,14 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerController : MonoBehaviour, IController
 {
     //CONTROLLERS
-    public MovementController3D movementController;                //Attached class with movement mechanics
-    public AppearanceController appearanceController;              //Attached class to modify character appearance
-    public PlayerAnimator playerAnimator;                          //Attached class to manage player animations
-    public SpriteOrderController spriteOrderController;            //Attached class to manage sprites sorting order
-    public ShootBall shootBall;                                    //Attached class to manage shooting
-    public PlayerStateController stateController;                  //Attached class to manage logic of player state
-    public PlayerCollisionController collisionController;          //Attached class to manage logic of player state
+    public MovementController3D movementController;                 //Attached class with movement mechanics
+    public AppearanceController appearanceController;               //Attached class to modify character appearance
+    public PlayerAnimator playerAnimator;                           //Attached class to manage player animations
+    public SpriteOrderController spriteOrderController;             //Attached class to manage sprites sorting order
+    public ShootBall shootBall;                                     //Attached class to manage shooting
+    public PlayerStateController stateController;                   //Attached class to manage logic of player state
+    public PlayerCollisionController collisionController;           //Attached class to manage logic of player state
+    public RagdollController ragdollController;                     //Attached class to manage ragdoll 
     //public GrappleLauncher grappleLauncher;                        //Attached class to manage grapple hook
 
     //ATTACHED COMPONENTS
@@ -123,6 +124,7 @@ public class PlayerController : MonoBehaviour, IController
     }
 
     public void onPressButtonEast() {
+        ragdollController.ActivateRagdoll(rb.velocity, movementController.GetCurrentFacingDirection());
     }
 
     public void onPressButtonNorth() {
@@ -147,7 +149,7 @@ public class PlayerController : MonoBehaviour, IController
     }
 
     public void onReleaseButtonEast() {
-        
+        ragdollController.DisableRagdoll();
     }
 
     public void onReleaseButtonNorth() {
