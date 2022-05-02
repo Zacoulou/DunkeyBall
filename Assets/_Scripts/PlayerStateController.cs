@@ -22,6 +22,7 @@ public class PlayerStateController : MonoBehaviour
         FALLING_WITHOUT_BALL,
         FALLING_WITH_BALL,
         WALLSLIDING,
+        RAGDOLL,
 
         NONE
     }
@@ -53,8 +54,12 @@ public class PlayerStateController : MonoBehaviour
     void FixedUpdate() {
         PlayerStates state = PlayerStates.NONE;
 
+        //RAGDOLL
+        if (pController.ragdollController.RagdollActive) {
+            state = PlayerStates.RAGDOLL;
+        }
         //NOT MOVING: IDLE STATE
-        if (!IsMovingX() && !IsMovingZ() && !IsMovingY()) {
+        else if (!IsMovingX() && !IsMovingZ() && !IsMovingY()) {
             if (pController.GetBallInPossession())
                 state = PlayerStates.IDLE_DRIBBLING;
             else

@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour, IController
     public void ObtainBall(Ball ball) {
         ballInPossession = ball;
         SetHasBall(true);
-        ball.SetPlayerWithPossesion(this.gameObject);
+        ball.SetPlayerWithPossesion(gameObject);
         ball.gameObject.SetActive(false);
     }
 
@@ -124,7 +124,8 @@ public class PlayerController : MonoBehaviour, IController
     }
 
     public void onPressButtonEast() {
-        ragdollController.ActivateRagdoll(rb.velocity, movementController.GetCurrentFacingDirection());
+        movementController.SetRegisterPlayerMovementInput(false);
+        ragdollController.ActivateRagdoll(rb.velocity, 3f);
     }
 
     public void onPressButtonNorth() {
@@ -149,7 +150,6 @@ public class PlayerController : MonoBehaviour, IController
     }
 
     public void onReleaseButtonEast() {
-        ragdollController.DisableRagdoll();
     }
 
     public void onReleaseButtonNorth() {

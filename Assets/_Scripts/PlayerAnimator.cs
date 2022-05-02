@@ -126,6 +126,9 @@ public class PlayerAnimator : MonoBehaviour
                     PlayAnimation(BODY_WALL_SLIDE, Layer.BODY);
                     break;
 
+                case PlayerStateController.PlayerStates.RAGDOLL:
+                    break;
+
                 default:
                     break;
             }

@@ -23,8 +23,9 @@ public class MovementController3D : MonoBehaviour {
     //CONTROLLER VARIABLES    
     Vector2 rawJoystickInput;                                   //Raw joystick input
     const double joystickMovementDeadzone = 0.2f;               //Amount Player can move joystick with no registered input
+    bool registerPlayerMovementInput = true;                    //Whether or not the player's movement input should be ignored or not
     
-    //SMOOVE MOVEMENT
+        //SMOOVE MOVEMENT
     bool smooveMove = false;                                    //smooth movement during knockback
     const float defaultsmooveIncrement = 0.05f;                 //Default amount character input is recognized
     float smooveIncrement = defaultsmooveIncrement;             //Actual smooveIncrement used 
@@ -104,14 +105,17 @@ public class MovementController3D : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        CheckHoldingJump();
-        CheckGrounded();
-        CheckTouchingWall();
-        CheckWallSliding();
-        WallJump();
-        Jump();
-        Move();
-        RotateToFaceMovementDirection();
+        if (registerPlayerMovementInput) {
+            CheckHoldingJump();
+            CheckGrounded();
+            CheckTouchingWall();
+            CheckWallSliding();
+            WallJump();
+            Move();
+            RotateToFaceMovementDirection();
+        }
+        CheckJump();
+        
     }
 
     // The player is grounded if a cast to the groundcheck position hits anything designated as ground
@@ -381,34 +385,34 @@ public class MovementController3D : MonoBehaviour {
         jumpBufferTimerCheck = Time.realtimeSinceStartup;
     }
 
-    private void Jump() {
-        if (CheckJumpBuffer() && !isJumping && !isWallJumping && CheckCoyoteTime()) {
-            bool isMovingJoystickDown = rawJoystickInput.y <= -joystickMovementDeadzone;
-            Collider[] oneWayColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, OneWayPlatformLayerMask);
-
-            if (!isMovingJoystickDown || oneWayColliders.Length == 0) {
-                isHoldingJump = true;
-                isJumping = true;
-                variableJumpForce = movementStats.jumpForce * minimumJumpForceMultiplier;
-                totalJumpForce = variableJumpForce;
-                pController.rb.velocity = new Vector3(pController.rb.velocity.x, 0f, pController.rb.velocity.z);
-                pController.rb.AddForce(new Vector2(0f, variableJumpForce * pController.rb.mass / Time.timeScale));
-                
+    private void CheckJump() {
+        //RECOVER FROM RAGDOLL
+        if (CheckJumpBuffer() && pController.ragdollController.RagdollActive && pController.ragdollController.CheckRagDollBuffer()) {
+            pController.ragdollController.DisableRagdoll();
+            SetRegisterPlayerMovementInput(true);
+            PerformJump();
+                        
+            Debug.Log(pController.ragdollController.GetRagdollRot());
+            if (pController.ragdollController.GetRagdollRot() < 0) {
+                pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
             } else {
-                Collider[] groundColliders = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayerMask);
- 
-                //Checks if player is trying to jump down through one way platform
-                if (isMovingJoystickDown && groundColliders.Length == 0 && oneWayColliders.Length > 0) {
-                    isHoldingJump = false;
-                    isJumping = true;
-                    StartCoroutine(pController.collisionController.DisableCollisionForTime(oneWayColliders[0], 0.2f));
-                    //Physics2D.IgnoreCollision(pController.collisionController.getBoxCollider2D(), );
-                    Debug.Log("Fall through Platform");
-                  
-                }
+                pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK);
             }
 
         }
+        //REGULAR JUMP
+        else if (CheckJumpBuffer() && !isJumping && !isWallJumping && CheckCoyoteTime()) {
+            PerformJump();
+        }
+    }
+
+    private void PerformJump() {
+        isHoldingJump = true;
+        isJumping = true;
+        variableJumpForce = movementStats.jumpForce * minimumJumpForceMultiplier;
+        totalJumpForce = variableJumpForce;
+        pController.rb.velocity = new Vector3(pController.rb.velocity.x, 0f, pController.rb.velocity.z);
+        pController.rb.AddForce(new Vector2(0f, variableJumpForce * pController.rb.mass / Time.timeScale));
     }
 
     bool CheckCoyoteTime() {
@@ -506,8 +510,8 @@ public class MovementController3D : MonoBehaviour {
         SpritesTransform.LeanRotateY(rotTarget, rotateTime);
     }
 
-    void IgnorePlayerMovementInput() {
-
+    public void SetRegisterPlayerMovementInput(bool state) {
+        registerPlayerMovementInput = state;
     }
 
     public void OnStartSprint() {

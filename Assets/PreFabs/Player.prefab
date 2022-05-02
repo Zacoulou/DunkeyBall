@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 4057097072472577002}
   - component: {fileID: 8899745789238994713}
   - component: {fileID: 8327572056538898258}
+  - component: {fileID: 2970469190411576816}
   m_Layer: 8
   m_Name: ArmRBone
   m_TagString: Untagged
@@ -201,6 +202,19 @@ CapsuleCollider:
   m_Height: 0.7
   m_Direction: 0
   m_Center: {x: 0.27, y: 0, z: 0}
+--- !u!114 &2970469190411576816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928768376351033768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fabc5283769ee4389d2d17997711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.2
 --- !u!1 &1140924410781779828
 GameObject:
   m_ObjectHideFlags: 0
@@ -5709,6 +5723,7 @@ GameObject:
   - component: {fileID: 4904100994507602204}
   - component: {fileID: 686161869826968511}
   - component: {fileID: 1574380264002677383}
+  - component: {fileID: 2435388315471830612}
   m_Layer: 8
   m_Name: TorsoBone
   m_TagString: Untagged
@@ -5764,6 +5779,19 @@ CapsuleCollider:
   m_Height: 1.2798585
   m_Direction: 0
   m_Center: {x: 0.3600706, y: 1.564198e-15, z: 0}
+--- !u!114 &2435388315471830612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2622814652858170293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fabc5283769ee4389d2d17997711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.2
 --- !u!1 &2666709516363116496
 GameObject:
   m_ObjectHideFlags: 0
@@ -6186,7 +6214,6 @@ Transform:
   - {fileID: 3496793235034676485}
   - {fileID: 1793759886913820099}
   - {fileID: 5587450147176733864}
-  - {fileID: 1973462336221771159}
   - {fileID: 7884874728331908293}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -6327,6 +6354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3382727447316845758}
   torsoTransform: {fileID: 3948560135164193753}
+  torsoBoneTransform: {fileID: 4904100994507602204}
   rbs:
   - {fileID: 686161869826968511}
   - {fileID: 4170129190181000836}
@@ -6865,7 +6893,7 @@ Transform:
   - {fileID: 1039216740928673460}
   - {fileID: 5097411760384181903}
   m_Father: {fileID: 3382727447316845753}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5895308117676041857
 GameObject:
@@ -11814,6 +11842,7 @@ GameObject:
   - component: {fileID: 4170129190181000836}
   - component: {fileID: 6788138994157898272}
   - component: {fileID: 4634126811703875249}
+  - component: {fileID: 2483175708052097542}
   m_Layer: 8
   m_Name: HeadBone
   m_TagString: Untagged
@@ -11900,6 +11929,19 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 0
   m_Center: {x: 0.45, y: 0, z: 0}
+--- !u!114 &2483175708052097542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6854224221456194542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fabc5283769ee4389d2d17997711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.2
 --- !u!1 &6884461683477165612
 GameObject:
   m_ObjectHideFlags: 0
@@ -11912,6 +11954,7 @@ GameObject:
   - component: {fileID: 1079691160645742304}
   - component: {fileID: 8083330711375007745}
   - component: {fileID: 1925175626289741380}
+  - component: {fileID: 8452111054945968180}
   m_Layer: 8
   m_Name: LegRBone
   m_TagString: Untagged
@@ -11998,6 +12041,19 @@ CapsuleCollider:
   m_Height: 0.1
   m_Direction: 0
   m_Center: {x: 0.03, y: 0, z: 0}
+--- !u!114 &8452111054945968180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884461683477165612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fabc5283769ee4389d2d17997711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.2
 --- !u!1 &6975150440606835527
 GameObject:
   m_ObjectHideFlags: 0
@@ -12175,6 +12231,7 @@ GameObject:
   - component: {fileID: 7096671982184246859}
   - component: {fileID: 3206517975832769930}
   - component: {fileID: 3646713447207811041}
+  - component: {fileID: 981828820706482877}
   m_Layer: 8
   m_Name: LegLBone
   m_TagString: Untagged
@@ -12261,98 +12318,19 @@ CapsuleCollider:
   m_Height: 0.1
   m_Direction: 0
   m_Center: {x: 0.03, y: 0, z: 0}
---- !u!1 &8650947242085875691
-GameObject:
+--- !u!114 &981828820706482877
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1973462336221771159}
-  - component: {fileID: 3685104057149304032}
-  m_Layer: 8
-  m_Name: Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1973462336221771159
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8650947242085875691}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.288}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3382727447316845753}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &3685104057149304032
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8650947242085875691}
+  m_GameObject: {fileID: 8349816922269047846}
   m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 2
-  m_Shape: 0
-  m_Color: {r: 0.8301887, g: 0.77066326, b: 0.121395506, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 1
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fabc5283769ee4389d2d17997711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.2
 --- !u!1 &8818661482744000948
 GameObject:
   m_ObjectHideFlags: 0
@@ -12365,6 +12343,7 @@ GameObject:
   - component: {fileID: 5981751429166694428}
   - component: {fileID: 7786137002182784123}
   - component: {fileID: 5538091568533443285}
+  - component: {fileID: 2036797130679915142}
   m_Layer: 8
   m_Name: ArmLBone
   m_TagString: Untagged
@@ -12451,3 +12430,16 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2036797130679915142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818661482744000948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fabc5283769ee4389d2d17997711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.2
