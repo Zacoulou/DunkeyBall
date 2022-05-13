@@ -24,9 +24,9 @@ MonoBehaviour:
     shoeR: {fileID: -2196426772055759329, guid: 0d362462563f7c745acb139fa0798867,
       type: 3}
   movementStats:
-    movementSpeed: 20
+    movementSpeed: 25
     jumpForce: 1100
-    sprintMultiplier: 1.75
+    sprintMultiplier: 2
   otherStats:
     shootingAccuracy: 0
   abilityName: 0

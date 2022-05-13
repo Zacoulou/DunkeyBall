@@ -92,7 +92,7 @@ public class MovementController3D : MonoBehaviour {
         movementStats = stats;
     }
 
-    void SetPosition(Vector2 pos, FacingDirection direction) {
+    void SetPositionAndDirection(Vector2 pos, FacingDirection direction) {
         gameObject.transform.position = pos;
         Flip(direction);
     }
@@ -354,12 +354,12 @@ public class MovementController3D : MonoBehaviour {
             switch (direction) {
                 case FacingDirection.LEFT:
                     inverseMovementDir = 1;
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                     break;
 
                 case FacingDirection.RIGHT:
                     inverseMovementDir = -1;
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                     break;
 
                 default:

@@ -55,6 +55,14 @@ public class PlayerController : MonoBehaviour, IController
     void FixedUpdate() {
     }
 
+    public void SetPosition(Vector3 pos) {
+        gameObject.transform.position = pos;
+    }
+
+    public Vector3 GetPosition() {
+        return gameObject.transform.position;
+    }
+
     public void SetHoop(HoopController hoop) {
         assignedHoop = hoop;
     }
@@ -125,7 +133,7 @@ public class PlayerController : MonoBehaviour, IController
 
     public void onPressButtonEast() {
         movementController.SetRegisterPlayerMovementInput(false);
-        ragdollController.ActivateRagdoll(rb.velocity, 3f);
+        ragdollController.ActivateRagdoll(rb.velocity, 1f);
     }
 
     public void onPressButtonNorth() {
