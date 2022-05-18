@@ -392,7 +392,7 @@ public class MovementController3D : MonoBehaviour {
             SetRegisterPlayerMovementInput(true);
             PerformJump();
                         
-            Debug.Log(pController.ragdollController.GetRagdollRot());
+            //Debug.Log(pController.ragdollController.GetRagdollRot());
             if (pController.ragdollController.GetRagdollRot() < 0) {
                 pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
             } else {

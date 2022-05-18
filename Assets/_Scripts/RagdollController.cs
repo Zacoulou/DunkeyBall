@@ -10,6 +10,8 @@ public class RagdollController : MonoBehaviour {
     [SerializeField] private Rigidbody[] rbs;                   //Array of all rigid bodies used in ragdoll
     [SerializeField] private Rigidbody rbCenter;                //Rigidbody used to position player where the ragdoll ended up
     private Dictionary<Rigidbody, CapsuleCollider> rbCapsuleDict = new Dictionary<Rigidbody, CapsuleCollider>(); //Dictionary for referencing capsule colliders
+    private Dictionary<Rigidbody, Transform> rbTransformDict = new Dictionary<Rigidbody, Transform>(); //Dictionary for referencing joint transforms
+    private Dictionary<Rigidbody, Vector3> initialJointPositions = new Dictionary<Rigidbody, Vector3>(); //Dictionary for referencing initial joint positions
 
     public bool RagdollActive { get; private set; }
     private Vector3 defaultTorsoScale;
@@ -21,12 +23,16 @@ public class RagdollController : MonoBehaviour {
     void Awake() {
         defaultTorsoScale = torsoTransform.localScale;
         DisableRagdoll();
-        InitializeDictionary();
+        InitializeDictionaries();
     }
 
-    void InitializeDictionary() {
+    void InitializeDictionaries() {
         foreach (var rb in rbs) {
             rbCapsuleDict.Add(rb, rb.gameObject.GetComponent<CapsuleCollider>());
+            rbTransformDict.Add(rb, rb.transform);
+            initialJointPositions.Add(rb, rb.transform.localPosition);
+
+            Debug.Log(rb.name + "  " + rb.transform.localPosition);
         }
     }
 
@@ -38,8 +44,13 @@ public class RagdollController : MonoBehaviour {
         animator.enabled = false;
         ragDollBufferTime = duration;
 
-        //Set ragdoll components to use physics
         foreach (var rb in rbs) {
+            //Position joints to initial locations
+            Transform jointTransform = rbTransformDict[rb];
+            Vector3 initialPos = initialJointPositions[rb];
+            jointTransform.localPosition = initialPos;
+
+            //Set ragdoll components to use physics
             CapsuleCollider capsule = rbCapsuleDict[rb];
             capsule.enabled = true;
             rb.isKinematic = false;
@@ -54,8 +65,7 @@ public class RagdollController : MonoBehaviour {
         animator.enabled = true;
 
         //Position player to where the ragdoll landed
-        Vector3 currPos = pController.GetPosition();
-        pController.SetPosition(new Vector3(rbCenter.position.x, currPos.y, rbCenter.position.z));
+        pController.SetPosition(rbCenter.position);
 
         //Set all ragdoll components back to not using physics
         foreach (var rb in rbs) {
