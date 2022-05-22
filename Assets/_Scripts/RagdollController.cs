@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+struct RagdollJoint {
+    public CapsuleCollider capsuleCollider;
+    public Transform hingeTransform;
+    public Vector3 initialPos;
+    public Vector3 initialEulerRot;
+}
+
 public class RagdollController : MonoBehaviour {
     [SerializeField] PlayerController pController;              //Reference to PlayerController
     [SerializeField] Animator animator;                         //Reference to Animator
@@ -9,9 +16,10 @@ public class RagdollController : MonoBehaviour {
     [SerializeField] private Transform torsoBoneTransform;      //Used to measure angle of torso when getting up
     [SerializeField] private Rigidbody[] rbs;                   //Array of all rigid bodies used in ragdoll
     [SerializeField] private Rigidbody rbCenter;                //Rigidbody used to position player where the ragdoll ended up
-    private Dictionary<Rigidbody, CapsuleCollider> rbCapsuleDict = new Dictionary<Rigidbody, CapsuleCollider>(); //Dictionary for referencing capsule colliders
-    private Dictionary<Rigidbody, Transform> rbTransformDict = new Dictionary<Rigidbody, Transform>(); //Dictionary for referencing joint transforms
-    private Dictionary<Rigidbody, Vector3> initialJointPositions = new Dictionary<Rigidbody, Vector3>(); //Dictionary for referencing initial joint positions
+    //private Dictionary<Rigidbody, CapsuleCollider> rbCapsuleDict = new Dictionary<Rigidbody, CapsuleCollider>(); //Dictionary for referencing capsule colliders
+    //private Dictionary<Rigidbody, Transform> rbTransformDict = new Dictionary<Rigidbody, Transform>(); //Dictionary for referencing joint transforms
+    //private Dictionary<Rigidbody, Vector3> initialJointPositions = new Dictionary<Rigidbody, Vector3>(); //Dictionary for referencing initial joint positions
+    private Dictionary<Rigidbody, RagdollJoint> ragdollJoints = new Dictionary<Rigidbody, RagdollJoint>();
 
     public bool RagdollActive { get; private set; }
     private Vector3 defaultTorsoScale;
@@ -22,17 +30,22 @@ public class RagdollController : MonoBehaviour {
     // Start is called before the first frame update
     void Awake() {
         defaultTorsoScale = torsoTransform.localScale;
-        DisableRagdoll();
         InitializeDictionaries();
+        DisableRagdoll();
     }
 
     void InitializeDictionaries() {
         foreach (var rb in rbs) {
-            rbCapsuleDict.Add(rb, rb.gameObject.GetComponent<CapsuleCollider>());
-            rbTransformDict.Add(rb, rb.transform);
-            initialJointPositions.Add(rb, rb.transform.localPosition);
+            //rbCapsuleDict.Add(rb, rb.gameObject.GetComponent<CapsuleCollider>());
+            //rbTransformDict.Add(rb, rb.transform);
+            //initialJointPositions.Add(rb, rb.transform.localPosition);
+            RagdollJoint joint = new RagdollJoint();
+            joint.capsuleCollider = rb.gameObject.GetComponent<CapsuleCollider>();
+            joint.hingeTransform = rb.transform;
+            joint.initialPos = rb.transform.localPosition;
+            joint.initialEulerRot = rb.transform.localEulerAngles;
 
-            Debug.Log(rb.name + "  " + rb.transform.localPosition);
+            ragdollJoints.Add(rb, joint);
         }
     }
 
@@ -46,13 +59,16 @@ public class RagdollController : MonoBehaviour {
 
         foreach (var rb in rbs) {
             //Position joints to initial locations
-            Transform jointTransform = rbTransformDict[rb];
-            Vector3 initialPos = initialJointPositions[rb];
-            jointTransform.localPosition = initialPos;
+            //Transform jointTransform = rbTransformDict[rb];
+            //Vector3 initialPos = initialJointPositions[rb];
+            //jointTransform.localPosition = initialPos;
+            RagdollJoint joint = ragdollJoints[rb];
+            Transform jointTransform = joint.hingeTransform;
+            jointTransform.localPosition = joint.initialPos;
+            jointTransform.localEulerAngles = joint.initialEulerRot;
 
             //Set ragdoll components to use physics
-            CapsuleCollider capsule = rbCapsuleDict[rb];
-            capsule.enabled = true;
+            joint.capsuleCollider.enabled = true;
             rb.isKinematic = false;
             rb.velocity = currVel;
         }
@@ -69,7 +85,13 @@ public class RagdollController : MonoBehaviour {
 
         //Set all ragdoll components back to not using physics
         foreach (var rb in rbs) {
-            rb.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            //Position joints to initial locations
+            RagdollJoint joint = ragdollJoints[rb];
+            Transform jointTransform = joint.hingeTransform;
+            jointTransform.localPosition = joint.initialPos;
+            jointTransform.localEulerAngles = joint.initialEulerRot;
+
+            joint.capsuleCollider.enabled = false;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
