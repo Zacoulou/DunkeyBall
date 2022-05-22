@@ -55,7 +55,7 @@ public class MovementController3D : MonoBehaviour {
 
     //WALL
     [SerializeField] Transform wallCheck;                       //A position marking where to check if the player is touching a wall
-    Vector3 wallCheckBox = new Vector3(0.05f, 0.5f, 0.2f);      //dimensions of overlap rectangle to determine if touching a wall
+    [SerializeField] Vector3 wallCheckBox;                      //dimensions of overlap rectangle to determine if touching a wall
     bool isTouchingWall;
     
     //WALL SLIDING
