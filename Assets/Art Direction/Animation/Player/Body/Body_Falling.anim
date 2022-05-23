@@ -74,7 +74,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -135,7 +135,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -196,7 +196,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -257,7 +257,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -270,28 +270,28 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3092338164
+      path: 1427850543
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2243242076
+      path: 3188844746
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1661120740
+      path: 1077305868
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 393603825
+      path: 1421632212
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -380,7 +380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -444,7 +444,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -508,7 +508,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -572,7 +572,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -636,7 +636,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -700,7 +700,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -764,7 +764,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -828,7 +828,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -892,7 +892,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -956,7 +956,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1020,7 +1020,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1084,7 +1084,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -1095,7 +1095,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1105,7 +1105,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1115,7 +1115,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpritesTranform/Torso/TorsoBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmRBone/ArmRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1125,7 +1125,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1135,7 +1135,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1145,7 +1145,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpritesTranform/Torso/TorsoBone/ArmL/ArmLBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1155,7 +1155,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1165,7 +1165,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1175,7 +1175,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpritesTranform/Torso/TorsoBone/ArmR/ArmRBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/ArmLBone/ArmLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1185,7 +1185,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1195,7 +1195,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1205,7 +1205,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpritesTranform/Torso/TorsoBone/Head/HeadBone
+    path: SpritesTransform/Rig/TorsoBone/TorsoRot/HeadBone/HeadRot
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

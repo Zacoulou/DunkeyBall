@@ -83,7 +83,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -153,14 +153,14 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
   m_PositionCurves:
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.43695426, y: 0.022668183, z: 0}
+        value: {x: -0.43695426, y: 0.178208, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -169,52 +169,52 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.083333336
-        value: {x: -0.1334436, y: -0.135194, z: 0}
-        inSlope: {x: 5.3832407, y: -1.5789106, z: 0}
-        outSlope: {x: 5.3832407, y: -1.5789106, z: 0}
+        value: {x: -0.12455982, y: 0.057483107, z: 0}
+        inSlope: {x: 5.4599843, y: -0.98498654, z: 0}
+        outSlope: {x: 5.4599843, y: -0.98498654, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.16666667
-        value: {x: 0.46025252, y: -0.24048358, z: 0}
-        inSlope: {x: 0, y: -0.8732715, z: 0}
-        outSlope: {x: 0, y: -0.8732715, z: 0}
+        value: {x: 0.47304317, y: 0.01404357, z: 0}
+        inSlope: {x: 0, y: -0.49850127, z: 0}
+        outSlope: {x: 0, y: -0.49850127, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.25
-        value: {x: 0.427845, y: -0.28073925, z: 0}
-        inSlope: {x: -0.77778053, y: 0, z: 0}
-        outSlope: {x: -0.77778053, y: 0, z: 0}
+        value: {x: 0.42984593, y: -0.025600433, z: 0}
+        inSlope: {x: -1.0367339, y: 0, z: 0}
+        outSlope: {x: -1.0367339, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.33333334
-        value: {x: 0.16318059, y: -0.23373002, z: 0}
-        inSlope: {x: -4.045407, y: 0.96923596, z: 0}
-        outSlope: {x: -4.045407, y: 0.96923596, z: 0}
+        value: {x: 0.15870889, y: 0.017191827, z: 0}
+        inSlope: {x: -4.057412, y: 0.37164262, z: 0}
+        outSlope: {x: -4.057412, y: 0.37164262, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.41666666
-        value: {x: -0.24638939, y: -0.11919993, z: 0}
-        inSlope: {x: -3.6008093, y: 1.5383893, z: 0}
-        outSlope: {x: -3.6008093, y: 1.5383893, z: 0}
+        value: {x: -0.24638939, y: 0.03634, z: 0}
+        inSlope: {x: -3.573979, y: 0.45955613, z: 0}
+        outSlope: {x: -3.573979, y: 0.45955613, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.5
-        value: {x: -0.43695426, y: 0.022668183, z: 0}
+        value: {x: -0.43695426, y: 0.178208, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -224,13 +224,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.13180625, y: -0.15554363, z: 0}
+        value: {x: 0.13180625, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -239,25 +239,25 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.083333336
-        value: {x: -0.17217457, y: -0.14376146, z: 0}
-        inSlope: {x: -5.2674465, y: 0.28277206, z: 0}
-        outSlope: {x: -5.2674465, y: 0.28277206, z: 0}
+        value: {x: -0.17217457, y: 0.01178, z: 0}
+        inSlope: {x: -5.2674465, y: 0.28272, z: 0}
+        outSlope: {x: -5.2674465, y: 0.28272, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.16666667
-        value: {x: -0.7461015, y: -0.035198748, z: 0}
-        inSlope: {x: -2.4874654, y: 1.1270307, z: 0}
-        outSlope: {x: -2.4874654, y: 1.1270307, z: 0}
+        value: {x: -0.7461015, y: 0.120341, z: 0}
+        inSlope: {x: -2.4874654, y: 1.1270221, z: 0}
+        outSlope: {x: -2.4874654, y: 1.1270221, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.25
-        value: {x: -0.84974587, y: 0.04407698, z: 0}
+        value: {x: -0.84974587, y: 0.199617, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -266,25 +266,25 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.33333334
-        value: {x: -0.5597919, y: -0.14453453, z: 0}
-        inSlope: {x: 4.573782, y: -1.7430798, z: 0}
-        outSlope: {x: 4.573782, y: -1.7430798, z: 0}
+        value: {x: -0.55967945, y: 0.027540088, z: 0}
+        inSlope: {x: 4.564866, y: -0.24947533, z: 0}
+        outSlope: {x: 4.564866, y: -0.24947533, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.41666666
-        value: {x: -0.087448955, y: -0.2464363, z: 0}
-        inSlope: {x: 4.1495895, y: 0, z: 0}
-        outSlope: {x: 4.1495895, y: 0, z: 0}
+        value: {x: -0.08893488, y: 0.017145276, z: 0}
+        inSlope: {x: 4.1489143, y: -0.16524054, z: 0}
+        outSlope: {x: 4.1489143, y: -0.16524054, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.5
-        value: {x: 0.13180625, y: -0.15554363, z: 0}
+        value: {x: 0.13180625, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -294,7 +294,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -306,28 +306,28 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1455510629
+      path: 280925478
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2960575709
+      path: 4003012576
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1455510629
+      path: 280925478
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2960575709
+      path: 4003012576
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -369,16 +369,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: -0.1334436
-        inSlope: 5.3832407
-        outSlope: 5.3832407
+        value: -0.12455982
+        inSlope: 5.4599843
+        outSlope: 5.4599843
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 0.46025252
+        value: 0.47304317
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -387,18 +387,18 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.427845
-        inSlope: -0.77778053
-        outSlope: -0.77778053
+        value: 0.42984593
+        inSlope: -1.0367339
+        outSlope: -1.0367339
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.33333334
-        value: 0.16318059
-        inSlope: -4.045407
-        outSlope: -4.045407
+        value: 0.15870889
+        inSlope: -4.057412
+        outSlope: -4.057412
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -406,8 +406,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.41666666
         value: -0.24638939
-        inSlope: -3.6008093
-        outSlope: -3.6008093
+        inSlope: -3.573979
+        outSlope: -3.573979
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -425,7 +425,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -433,7 +433,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.022668183
+        value: 0.178208
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -442,25 +442,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: -0.135194
-        inSlope: -1.5789106
-        outSlope: -1.5789106
+        value: 0.057483107
+        inSlope: -0.98498654
+        outSlope: -0.98498654
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -0.24048358
-        inSlope: -0.8732715
-        outSlope: -0.8732715
+        value: 0.01404357
+        inSlope: -0.49850127
+        outSlope: -0.49850127
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: -0.28073925
+        value: -0.025600433
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -469,25 +469,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.33333334
-        value: -0.23373002
-        inSlope: 0.96923596
-        outSlope: 0.96923596
+        value: 0.017191827
+        inSlope: 0.37164262
+        outSlope: 0.37164262
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.41666666
-        value: -0.11919993
-        inSlope: 1.5383893
-        outSlope: 1.5383893
+        value: 0.03634
+        inSlope: 0.45955613
+        outSlope: 0.45955613
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 0.022668183
+        value: 0.178208
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -498,7 +498,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -571,7 +571,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -644,7 +644,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -717,7 +717,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -790,7 +790,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -834,18 +834,18 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.33333334
-        value: -0.5597919
-        inSlope: 4.573782
-        outSlope: 4.573782
+        value: -0.55967945
+        inSlope: 4.564866
+        outSlope: 4.564866
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.41666666
-        value: -0.087448955
-        inSlope: 4.1495895
-        outSlope: 4.1495895
+        value: -0.08893488
+        inSlope: 4.1489143
+        outSlope: 4.1489143
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -863,7 +863,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -871,7 +871,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.15554363
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -880,25 +880,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: -0.14376146
-        inSlope: 0.28277206
-        outSlope: 0.28277206
+        value: 0.01178
+        inSlope: 0.28272
+        outSlope: 0.28272
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -0.035198748
-        inSlope: 1.1270307
-        outSlope: 1.1270307
+        value: 0.120341
+        inSlope: 1.1270221
+        outSlope: 1.1270221
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.25
-        value: 0.04407698
+        value: 0.199617
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -907,25 +907,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.33333334
-        value: -0.14453453
-        inSlope: -1.7430798
-        outSlope: -1.7430798
+        value: 0.027540088
+        inSlope: -0.24947533
+        outSlope: -0.24947533
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.41666666
-        value: -0.2464363
-        inSlope: 0
-        outSlope: 0
+        value: 0.017145276
+        inSlope: -0.16524054
+        outSlope: -0.16524054
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: -0.15554363
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -936,7 +936,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1009,7 +1009,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1082,7 +1082,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1155,7 +1155,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1228,7 +1228,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -1239,7 +1239,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1249,7 +1249,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1259,7 +1259,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpritesTranform/Torso/LegL/LegLBone
+    path: SpritesTransform/Rig/TorsoBone/LegLBone/LegLRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1269,7 +1269,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1279,7 +1279,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1289,7 +1289,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpritesTranform/Torso/LegR/LegRBone
+    path: SpritesTransform/Rig/TorsoBone/LegRBone/LegRRot
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
