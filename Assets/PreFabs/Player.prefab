@@ -5579,8 +5579,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: 15
-    max: 130
+    min: -7.2052255
+    max: 4.7010384
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -5706,8 +5706,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -150
-    max: -15
+    min: -94.796326
+    max: -83.91754
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -6129,17 +6129,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pController: {fileID: 5361569356486771760}
   animator: {fileID: 3382727447316845758}
-  torsoTransform: {fileID: 1372751723933279095}
-  torsoBoneTransform: {fileID: 1372751723933279095}
-  rbs:
-  - {fileID: 8705632912476486963}
-  - {fileID: 1921230947796584767}
-  - {fileID: 3633138456089498477}
-  - {fileID: 2123924514836399117}
-  - {fileID: 3796291029454405945}
-  - {fileID: 6973601851556811493}
-  - {fileID: 7293543499991844274}
-  rbCenter: {fileID: 8705632912476486963}
+  centerBoneTransform: {fileID: 1372751723933279095}
+  ragdollJoints:
+  - rb: {fileID: 8705632912476486963}
+    capsuleCollider: {fileID: 1808029624193065875}
+    hingeTransform: {fileID: 1372751723933279095}
+    spriteParentTransform: {fileID: 2306583997669593632}
+  - rb: {fileID: 1921230947796584767}
+    capsuleCollider: {fileID: 643676278030242553}
+    hingeTransform: {fileID: 9186007833019238823}
+    spriteParentTransform: {fileID: 3897073312229676190}
+  - rb: {fileID: 3633138456089498477}
+    capsuleCollider: {fileID: 4974220836392160790}
+    hingeTransform: {fileID: 8554847385401163120}
+    spriteParentTransform: {fileID: 2422027614340091398}
+  - rb: {fileID: 2123924514836399117}
+    capsuleCollider: {fileID: 4929787694865549926}
+    hingeTransform: {fileID: 3370963501767978185}
+    spriteParentTransform: {fileID: 939156137144146730}
+  - rb: {fileID: 3796291029454405945}
+    capsuleCollider: {fileID: 5253779519511041166}
+    hingeTransform: {fileID: 4357505344183980612}
+    spriteParentTransform: {fileID: 8514744254185208967}
+  - rb: {fileID: 6973601851556811493}
+    capsuleCollider: {fileID: 7221133499835937585}
+    hingeTransform: {fileID: 8068770229949425542}
+    spriteParentTransform: {fileID: 2951702676945348607}
+  - rb: {fileID: 7293543499991844274}
+    capsuleCollider: {fileID: 7331462899693291541}
+    hingeTransform: {fileID: 2239633535520245226}
+    spriteParentTransform: {fileID: 3503949163610439008}
 --- !u!114 &3195882851675850268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12328,8 +12347,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -60
-    max: 60
+    min: -2
+    max: 2
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -12441,8 +12460,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -60
-    max: 60
+    min: -2
+    max: 2
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
