@@ -5,11 +5,9 @@ public class RagdollController : MonoBehaviour {
     [SerializeField] PlayerController pController;              //Reference to PlayerController
     [SerializeField] Animator animator;                         //Reference to Animator
     [SerializeField] private Transform centerBoneTransform;     //Used to measure angle of torso when getting up and for scaling and centering
-
     [SerializeField] private RagdollJointInspectorData[] ragdollJointInspectorInfo; //Array of all ragdoll joints used assemble rig in inspector
-    private List<RagdollJoint> ragdollJoints = new List<RagdollJoint>();                                   //Array of all ragdoll joints used in the rig
-
-
+    
+    private List<RagdollJoint> ragdollJoints = new List<RagdollJoint>();            //Array of all ragdoll joints used in the rig
     public bool RagdollActive { get; private set; }
     private Vector3 defaultTorsoScale;
     private float timeAtRagdoll = 0f;
@@ -29,7 +27,6 @@ public class RagdollController : MonoBehaviour {
             joint.Initialize();
             ragdollJoints.Add(joint);
         }
-        Debug.Log(ragdollJoints);
     }
 
     public void ActivateRagdoll(Vector3 currVel, float duration) {

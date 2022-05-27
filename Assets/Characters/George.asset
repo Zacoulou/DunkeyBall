@@ -17,10 +17,11 @@ MonoBehaviour:
     torso: {fileID: -5482384453900734672, guid: 31d4cfca66903a8488b7ba92b152725e,
       type: 3}
     armL: {fileID: 7665187590563864118, guid: 31d4cfca66903a8488b7ba92b152725e, type: 3}
-    armR: {fileID: -1388877501357060673, guid: 31d4cfca66903a8488b7ba92b152725e, type: 3}
+    armR: {fileID: 7642017761783656938, guid: 5e213943bb90b824db31c9cf3e9a61d8, type: 3}
     tail: {fileID: 5305006639994825535, guid: 31d4cfca66903a8488b7ba92b152725e, type: 3}
     shoeL: {fileID: 6598545173292220444, guid: 31d4cfca66903a8488b7ba92b152725e, type: 3}
-    shoeR: {fileID: 6598545173292220444, guid: 31d4cfca66903a8488b7ba92b152725e, type: 3}
+    shoeR: {fileID: -2196426772055759329, guid: 0d362462563f7c745acb139fa0798867,
+      type: 3}
   movementStats:
     movementSpeed: 35
     jumpForce: 1300
