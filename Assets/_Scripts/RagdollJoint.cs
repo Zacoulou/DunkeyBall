@@ -1,22 +1,43 @@
 ﻿using System;
 using UnityEngine;
 
+//Struct used in the inspector to generate joints
+[Serializable]
+struct RagdollJointInspectorData {
+    public Rigidbody rb;
+    public CapsuleCollider capsuleCollider;
+    public Transform hingeTransform;
+    public Transform spriteParentTransform;
+}
+
+
 
 // Struct to organanize all important variables of each joint in the ragdoll
-[Serializable]
 struct RagdollJoint {
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private CapsuleCollider capsuleCollider;
+    private Rigidbody rb;
+    private CapsuleCollider capsuleCollider;
 
     //Hinge Components. Used to reset hinges to initial position / rotation
-    [SerializeField] private Transform hingeTransform;
+    private Transform hingeTransform;
     private Vector3 hingeInitialPos;
     private Vector3 hingeInitialEulerRot;
 
     //SpriteParent Components. Used to reset sprites to initial position / rotation
-    [SerializeField] private Transform spriteParentTransform;
+    private Transform spriteParentTransform;
     private Vector3 spriteParentInitialPos;
     private Vector3 spriteParentInitialEulerRot;
+
+    public RagdollJoint(Rigidbody rigidBody, CapsuleCollider collider, Transform hingeT, Transform spriteParentT) {
+        rb = rigidBody;
+        capsuleCollider = collider;
+        hingeTransform = hingeT;
+        spriteParentTransform = spriteParentT;
+
+        hingeInitialPos = Vector3.zero;
+        hingeInitialEulerRot = Vector3.zero;
+        spriteParentInitialPos = Vector3.zero;
+        spriteParentInitialEulerRot = Vector3.zero;
+    }
 
     public void Initialize() {
         hingeInitialPos = hingeTransform.localPosition;

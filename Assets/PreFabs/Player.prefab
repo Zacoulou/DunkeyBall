@@ -6130,7 +6130,7 @@ MonoBehaviour:
   pController: {fileID: 5361569356486771760}
   animator: {fileID: 3382727447316845758}
   centerBoneTransform: {fileID: 1372751723933279095}
-  ragdollJoints:
+  ragdollJointInspectorInfo:
   - rb: {fileID: 8705632912476486963}
     capsuleCollider: {fileID: 1808029624193065875}
     hingeTransform: {fileID: 1372751723933279095}
