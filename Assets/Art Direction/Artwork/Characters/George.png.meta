@@ -44,6 +44,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -52,9 +54,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -75,9 +77,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -159,10 +164,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 55.645966, y: 13.329407, z: 0}
         rotation: {x: 0, y: 0, z: 0.7113632, w: 0.7028246}
         length: 59.593857
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 99b51b79671192340800000000000000
       internalID: 4839418475635104665
       vertices:
@@ -512,10 +521,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 93.392624, y: 23.396912, z: 0}
         rotation: {x: 0, y: 0, z: 0.9769025, w: 0.21368586}
         length: 58.59616
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: f3beaf39e6b2f9940800000000000000
       internalID: 5305006639994825535
       vertices:
@@ -1195,10 +1208,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 9.515747, y: 62.904663, z: 0}
         rotation: {x: 0, y: 0, z: -0.70482224, w: 0.70938396}
         length: 55.7645
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 63e9a407087306a60800000000000000
       internalID: 7665187590563864118
       vertices:
@@ -1536,10 +1553,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 46.767853, y: 40.402863, z: 0}
         rotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
         length: 72.31243
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 03f6f17d268aae3b0800000000000000
       internalID: -5482384453900734672
       vertices:
@@ -1958,10 +1979,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 14.147766, y: 68.30112, z: 0}
         rotation: {x: 0, y: 0, z: -0.7032112, w: 0.7109811}
         length: 65.48091
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: fbd84176547b9bce0800000000000000
       internalID: -1388877501357060673
       vertices:
@@ -2326,10 +2351,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 12.708771, y: 19.264008, z: 0}
         rotation: {x: 0, y: 0, z: -0.7013818, w: 0.7127858}
         length: 13.630206
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: c108370efddb29b50800000000000000
       internalID: 6598545173292220444
       vertices:
@@ -2935,6 +2964,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      GeorgeHead: 4839418475635104665
+      George_6: 8925345920579716320
+      GeorgeFoot: 6598545173292220444
+      GeorgeArmL: 7665187590563864118
+      GeorgeArmR: -1388877501357060673
+      GeorgeTorso: -5482384453900734672
+      GeorgeTail: 5305006639994825535
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

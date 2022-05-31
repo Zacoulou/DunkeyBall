@@ -132,7 +132,7 @@ QualitySettings:
     antiAliasing: 8
     softParticles: 0
     softVegetation: 1
-    realtimeReflectionProbes: 0
+    realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 0
     vSyncCount: 2
     lodBias: 2
@@ -158,6 +158,7 @@ QualitySettings:
     PS4: 3
     PSM: 3
     PSP2: 1
+    Server: 0
     Stadia: 3
     Standalone: 3
     Tizen: 1

@@ -112,7 +112,7 @@ public class MovementController3D : MonoBehaviour {
             CheckWallSliding();
             WallJump();
             Move();
-            RotateToFaceMovementDirection();
+            //RotateToFaceMovementDirection();
         }
         CheckJump();
         
@@ -354,12 +354,14 @@ public class MovementController3D : MonoBehaviour {
             switch (direction) {
                 case FacingDirection.LEFT:
                     inverseMovementDir = 1;
-                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    //transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.Rotate(0f, 180f, 0f);
                     break;
 
                 case FacingDirection.RIGHT:
                     inverseMovementDir = -1;
-                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    //transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.Rotate(0f, 180f, 0f);
                     break;
 
                 default:

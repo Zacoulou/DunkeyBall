@@ -47,6 +47,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -55,9 +57,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -78,9 +80,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -162,10 +167,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 67.81494, y: 30.837494, z: 0}
         rotation: {x: 0, y: 0, z: 0.7086357, w: 0.7055746}
         length: 98.73842
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: cbbbc714f65a83fd0800000000000000
       internalID: -2361956107297178692
       vertices:
@@ -585,10 +594,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 67.67563, y: 2.5870056, z: 0}
         rotation: {x: 0, y: 0, z: 0.70992947, w: 0.7042728}
         length: 53.43109
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: ce50e8168cb7fada0800000000000000
       internalID: -5931386083663280660
       vertices:
@@ -1090,10 +1103,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 14.494629, y: 63.1138, z: 0}
         rotation: {x: 0, y: 0, z: -0.7046474, w: 0.70955765}
         length: 61.552143
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: ae1375a4aa6ed0a60800000000000000
       internalID: 7642017761783656938
       vertices:
@@ -2187,10 +2204,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 21.957947, y: 19.13948, z: 0}
         rotation: {x: 0, y: 0, z: -0.7011911, w: 0.71297336}
         length: 11.809821
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 1a99d11c8591442f0800000000000000
       internalID: -989638149126907487
       vertices:
@@ -2566,6 +2587,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Micah_4: 755517110762399732
+      JebadiahTorso: -2361956107297178692
+      JebadiahHead: -5931386083663280660
+      Micah_6: -3051970065626355507
+      JebadiahFoot: -989638149126907487
+      Micah_2: 9184989611922563284
+      JebadiahArm: 7642017761783656938
+      Micah_5: -7026068419796392365
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

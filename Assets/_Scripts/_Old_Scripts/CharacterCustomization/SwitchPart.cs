@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.U2D.Animation;
+
 
 public class SwitchPart : MonoBehaviour {
     [SerializeField] BodyParts[] bodyParts;
@@ -15,9 +15,9 @@ public class SwitchPart : MonoBehaviour {
 
 [System.Serializable]
 public class BodyParts {
-    [SerializeField] SpriteResolver[] spriteResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver[] spriteResolver;
 
-    public SpriteResolver[] SpriteResolver { get => spriteResolver; }
+    public UnityEngine.U2D.Animation.SpriteResolver[] SpriteResolver { get => spriteResolver; }
 
     //method that are going to be triggered by the button, and it will switch the sprites of each resolver list.
     public void SwitchPart(string[] labels, int id) {

@@ -41,6 +41,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -50,8 +52,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 1
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -72,9 +74,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -156,10 +161,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 36.17755, y: 1.2834473, z: 0}
         rotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
         length: 58.48562
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 614076c7d001ffc30800000000000000
       internalID: 4395249411444638742
       vertices:
@@ -509,10 +518,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 7.6576767, y: 50.36148, z: 0}
         rotation: {x: 0, y: 0, z: -0.7071069, w: 0.7071067}
         length: 47.809692
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 968e8f5e3ef8c2600800000000000000
       internalID: 444888672181479529
       vertices:
@@ -930,10 +943,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 34.32086, y: 22.988113, z: 0}
         rotation: {x: 0, y: 0, z: 0.7089849, w: 0.7052237}
         length: 87.26553
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 9c4df3dbd88a55fc0800000000000000
       internalID: -3506711408119130935
       vertices:
@@ -1320,10 +1337,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 7.7006226, y: 49.89731, z: 0}
         rotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
         length: 47.345516
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: 5cb86b7bc1dcb3dc0800000000000000
       internalID: -3658104749083423803
       vertices:
@@ -1741,10 +1762,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 9.897308, y: 15.13781, z: 0}
         rotation: {x: 0, y: 0, z: -0.6814518, w: 0.731863}
         length: 13.029926
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: d862992a8b19a22c0800000000000000
       internalID: -4455588659141728627
       vertices:
@@ -1964,10 +1989,14 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: bone_1
+        guid: 
         position: {x: 11.495224, y: 15.13781, z: 0}
         rotation: {x: 0, y: 0, z: -0.7205669, w: 0.6933855}
         length: 12.077389
         parentId: -1
+        color:
+          serializedVersion: 2
+          rgba: 0
       spriteID: fc95a9d3bf800bb40800000000000000
       internalID: 5453869023909009871
       vertices:
@@ -2181,6 +2210,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Guppy_0: 4395249411444638742
+      Guppy_1: 444888672181479529
+      Guppy_4: -4455588659141728627
+      Guppy_5: 5453869023909009871
+      Guppy_2: -3506711408119130935
+      Guppy_3: -3658104749083423803
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
