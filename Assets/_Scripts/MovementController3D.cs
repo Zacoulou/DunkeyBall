@@ -82,6 +82,14 @@ public class MovementController3D : MonoBehaviour {
 
     //Character Rotation
     [SerializeField] private Transform SpritesTransform;
+    const float leftRot = 180f;
+    const float rightRot = 0f;
+    float currRot = 0f;
+
+    const float rotateTime = 0.05f;
+    const float minRotation = -15f;
+    const float maxRotation = 15f;
+
 
     public enum FacingDirection {
         RIGHT = 0,
@@ -112,7 +120,7 @@ public class MovementController3D : MonoBehaviour {
             CheckWallSliding();
             WallJump();
             Move();
-            //RotateToFaceMovementDirection();
+            RotateToFaceMovementDirection();
         }
         CheckJump();
         
@@ -354,18 +362,14 @@ public class MovementController3D : MonoBehaviour {
             switch (direction) {
                 case FacingDirection.LEFT:
                     inverseMovementDir = 1;
-                    //transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                    transform.Rotate(0f, 180f, 0f);
+                    currRot = leftRot;
+                    transform.eulerAngles = new Vector3(0f, leftRot, 0f);
                     break;
 
                 case FacingDirection.RIGHT:
                     inverseMovementDir = -1;
-                    //transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                    transform.Rotate(0f, 180f, 0f);
-                    break;
-
-                default:
-                    Debug.Log("Not a valid turn direction " + direction);
+                    currRot = rightRot;
+                    transform.eulerAngles = new Vector3(0f, rightRot, 0f);
                     break;
             }
         }
@@ -488,12 +492,9 @@ public class MovementController3D : MonoBehaviour {
     }
 
     void RotateToFaceMovementDirection() {
-        float rotateTime = 0.05f;
-        float minRotation = -15f;
-        float maxRotation = 15f;
-
         float rotTarget = 0f;
 
+        //In shooting state, rotate character to face hoop
         if (pController.stateController.GetCurrentState() == PlayerStateController.PlayerStates.SHOOTING) {
             Vector3 distanceToHoop = gameObject.transform.position - pController.GetHoop().GetHoopCenterPosition();
             rotTarget = Mathf.Clamp(Mathf.Atan(distanceToHoop.z / distanceToHoop.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
@@ -502,14 +503,13 @@ public class MovementController3D : MonoBehaviour {
             if (movementVector.x != 0f || movementVector.z != 0f) {
                 rotTarget = Mathf.Clamp(Mathf.Atan(movementVector.z / movementVector.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
             }
-            //Flip in the case of no xVelocity and player is facing left
+            //Invert rotation when no xVelocity and player is facing left, because otherwise it assumes facing right
             if (movementVector.x == 0f && currFacingDirection == FacingDirection.LEFT) {
                 rotTarget *= -1f;
             }
         }
-        
 
-        SpritesTransform.LeanRotateY(rotTarget, rotateTime);
+        SpritesTransform.LeanRotateY(currRot + rotTarget, rotateTime);
     }
 
     public void SetRegisterPlayerMovementInput(bool state) {

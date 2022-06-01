@@ -6180,7 +6180,7 @@ MonoBehaviour:
   groundCheckRadius: 0.1
   wallCheck: {fileID: 3382727445870568918}
   wallCheckBox: {x: 0.1, y: 1, z: 0.4}
-  SpritesTransform: {fileID: 621716062320921569}
+  SpritesTransform: {fileID: 7884874728331908293}
 --- !u!114 &3382727447316845735
 MonoBehaviour:
   m_ObjectHideFlags: 0
