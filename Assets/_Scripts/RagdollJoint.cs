@@ -53,6 +53,7 @@ struct RagdollJoint {
 
         spriteParentTransform.localPosition = spriteParentInitialPos;
         spriteParentTransform.localEulerAngles = spriteParentInitialEulerRot;
+        spriteParentTransform.localScale = new Vector3(1f, 1f, 1f);
     }
 
     public void EnableRagdoll(Vector3 currVel) {
