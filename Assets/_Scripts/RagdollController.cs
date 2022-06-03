@@ -4,9 +4,10 @@ using UnityEngine;
 public class RagdollController : MonoBehaviour {
     [SerializeField] PlayerController pController;              //Reference to PlayerController
     [SerializeField] Animator animator;                         //Reference to Animator
-    [SerializeField] private Transform centerBoneTransform;     //Used to measure angle of torso when getting up and for scaling and centering
+    [SerializeField] private Transform centerBoneTransform;     //Used for scaling and centering
+    [SerializeField] private RagdollJointInspectorData ragdollTailJoint;            //Tail ragdoll joints used assemble rig in inspector
     [SerializeField] private RagdollJointInspectorData[] ragdollJointInspectorInfo; //Array of all ragdoll joints used assemble rig in inspector
-    
+
     private List<RagdollJoint> ragdollJoints = new List<RagdollJoint>();            //Array of all ragdoll joints used in the rig
     public bool RagdollActive { get; private set; }
     private Vector3 defaultTorsoScale;
@@ -14,19 +15,24 @@ public class RagdollController : MonoBehaviour {
     private float ragDollBufferTime = 0f;
 
 
-    // Start is called before the first frame update
-    void Awake() {
+    public void InitializeRagdollJoints(bool hasTail) {
         defaultTorsoScale = centerBoneTransform.localScale;
-        InitializeRagdollJoints();
-        DisableRagdoll();
-    }
 
-    void InitializeRagdollJoints() {
+        //Initialize all joints
         foreach (RagdollJointInspectorData j in ragdollJointInspectorInfo) {
             RagdollJoint joint = new RagdollJoint(j.rb, j.capsuleCollider, j.hingeTransform, j.spriteParentTransform);
             joint.Initialize();
             ragdollJoints.Add(joint);
         }
+
+        //Add tail to ragdoll if it is present
+        if (hasTail) {
+            RagdollJoint joint = new RagdollJoint(ragdollTailJoint.rb, ragdollTailJoint.capsuleCollider, ragdollTailJoint.hingeTransform, ragdollTailJoint.spriteParentTransform);
+            joint.Initialize();
+            ragdollJoints.Add(joint);
+        }
+
+        DisableRagdoll();
     }
 
     public void ActivateRagdoll(Vector3 currVel, float duration) {
@@ -58,7 +64,7 @@ public class RagdollController : MonoBehaviour {
     }
 
     public float GetRagdollRot() {
-        return centerBoneTransform.localEulerAngles.z * Mathf.Rad2Deg;
+        return 360f - centerBoneTransform.localEulerAngles.z;
     }
 
     public bool CheckRagDollBuffer() {

@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a90bc1fd8f434b4ca4530b128875ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempCharacterOption: {fileID: 11400000, guid: 2d310f09ad2cbc348a737ec9cada4ec2,
+  tempCharacterOption: {fileID: 11400000, guid: f790d82000a92824aaff93fed2c95a94,
     type: 2}
   tempHoop: {fileID: 8296172667585273661}
 --- !u!114 &208711824

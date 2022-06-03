@@ -394,16 +394,19 @@ public class MovementController3D : MonoBehaviour {
     private void CheckJump() {
         //RECOVER FROM RAGDOLL
         if (CheckJumpBuffer() && pController.ragdollController.RagdollActive && pController.ragdollController.CheckRagDollBuffer()) {
+            float ragdollRotation = pController.ragdollController.GetRagdollRot();
+            Debug.Log(ragdollRotation);
+
             pController.ragdollController.DisableRagdoll();
             SetRegisterPlayerMovementInput(true);
             PerformJump();
                         
-            //Debug.Log(pController.ragdollController.GetRagdollRot());
-            if (pController.ragdollController.GetRagdollRot() < 0) {
-                pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
-            } else {
-                pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK);
-            }
+            
+            //if (pController.ragdollController.GetRagdollRot() < 0) {
+            //    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
+            //} else {
+            //    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK);
+            //}
 
         }
         //REGULAR JUMP

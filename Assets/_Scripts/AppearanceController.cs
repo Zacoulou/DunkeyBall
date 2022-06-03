@@ -36,4 +36,14 @@ public class AppearanceController : MonoBehaviour
     public void SetBallVisible(bool state) {
         ball.enabled = state;
     }
+
+    public bool GetHasTail() {
+        bool hasTail = false;
+
+        if (tail.sprite) {
+            hasTail = true;
+        }
+
+        return hasTail;
+    }
 }

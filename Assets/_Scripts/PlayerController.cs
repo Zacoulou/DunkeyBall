@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IController
 
     public void InitializePlayerController(Character character) {
         appearanceController.SetAppearanceValues(character.appearanceDetails);
+        ragdollController.InitializeRagdollJoints(appearanceController.GetHasTail());
         movementController.SetMovementValues(character.movementStats);
     }
 
