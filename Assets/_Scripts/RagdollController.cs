@@ -64,7 +64,7 @@ public class RagdollController : MonoBehaviour {
     }
 
     public float GetRagdollRot() {
-        return 360f - centerBoneTransform.localEulerAngles.z;
+        return centerBoneTransform.localEulerAngles.z;
     }
 
     public bool CheckRagDollBuffer() {
