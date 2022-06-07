@@ -394,19 +394,21 @@ public class MovementController3D : MonoBehaviour {
     private void CheckJump() {
         //RECOVER FROM RAGDOLL
         if (CheckJumpBuffer() && pController.ragdollController.RagdollActive && pController.ragdollController.CheckRagDollBuffer()) {
-            float ragdollRotation = pController.ragdollController.GetRagdollRot();
-            Debug.Log(ragdollRotation);
+            RagdollOrientation ragdollOrientation = pController.ragdollController.GetRagdollOrientation();
 
             pController.ragdollController.DisableRagdoll();
             SetRegisterPlayerMovementInput(true);
             PerformJump();
-                        
-            
-            //if (pController.ragdollController.GetRagdollRot() < 0) {
-            //    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
-            //} else {
-            //    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK);
-            //}
+
+            //Determine which orientation to get up
+            switch (ragdollOrientation) {
+                case RagdollOrientation.LEANING_BACKWARD:
+                    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK);
+                    break;
+                case RagdollOrientation.LEANING_FORWARD:
+                    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
+                    break;
+            }
 
         }
         //REGULAR JUMP

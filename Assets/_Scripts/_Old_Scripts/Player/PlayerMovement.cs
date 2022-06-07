@@ -290,7 +290,7 @@ public class PlayerMovement : MonoBehaviour {
             rdController.DisableRagdoll();
             stoppedState = false;
 
-            if (rdController.GetRagdollRot() < 0)
+            if (rdController.GetWrappedRagdollRot() < 0)
                 animator.SetTrigger("getUpFront");
             else
                 animator.SetTrigger("getUpBack");

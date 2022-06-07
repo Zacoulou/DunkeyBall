@@ -63,12 +63,39 @@ public class RagdollController : MonoBehaviour {
         }
     }
 
-    public float GetRagdollRot() {
-        return centerBoneTransform.localEulerAngles.z;
+    public float GetWrappedRagdollRot() {
+        return WrapAngle(centerBoneTransform.localEulerAngles.z);
+    }
+
+    public RagdollOrientation GetRagdollOrientation() {
+        RagdollOrientation orientation = RagdollOrientation.STRAIGHT_UP;
+        
+        if (GetWrappedRagdollRot() < -45) {
+            orientation = RagdollOrientation.LEANING_FORWARD;
+        } else if (GetWrappedRagdollRot() > 45) {
+            orientation = RagdollOrientation.LEANING_BACKWARD;
+        }
+
+        return orientation;
+    }
+
+    //Wrap angle between -180 and 180 degrees
+    private static float WrapAngle(float angle) {
+        angle %= 360;
+        if (angle > 180)
+            return angle - 360;
+
+        return angle;
     }
 
     public bool CheckRagDollBuffer() {
         return Time.realtimeSinceStartup - timeAtRagdoll >= ragDollBufferTime;
     }
 
+}
+
+public enum RagdollOrientation {
+    STRAIGHT_UP,
+    LEANING_FORWARD,
+    LEANING_BACKWARD
 }
