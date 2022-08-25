@@ -11,7 +11,8 @@
                     "id": "442f6675-dccf-4dc3-a365-c394752eed05",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -19,7 +20,8 @@
                     "id": "6fb39168-99da-495f-8374-b27ed9a4f8a1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Shoot",
@@ -27,7 +29,8 @@
                     "id": "f5581b6e-50d8-4120-9128-e5c38c23a62a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Swat",
@@ -35,7 +38,8 @@
                     "id": "57b4cd13-2557-40d3-a22b-a0ac1a886282",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Select",
@@ -43,7 +47,8 @@
                     "id": "b8b5eb1c-bf99-4d16-8e0c-85fb1f70fd7b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Sprint",
@@ -51,7 +56,8 @@
                     "id": "18d0b630-e097-4d42-a4aa-7c3a10869b0d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "StartButton",
@@ -59,7 +65,8 @@
                     "id": "0cfb4276-ad0c-4768-9de1-22ba8ccb010e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "R_Bumper",
@@ -67,7 +74,8 @@
                     "id": "4a6b07be-18aa-4382-bbcf-156efe5e1c39",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "L_Bumper",
@@ -75,7 +83,8 @@
                     "id": "98b9cb6c-7b23-476a-8138-0dd6e345046d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "L_Trigger",
@@ -83,7 +92,8 @@
                     "id": "980b1201-8b4a-42f4-9d1c-7cdc1eeddf87",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -222,7 +232,7 @@
                 {
                     "name": "",
                     "id": "54067b69-347b-4717-8322-698b4f930782",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -244,7 +254,7 @@
                 {
                     "name": "",
                     "id": "3394939d-decb-49b1-99d5-24588d070220",
-                    "path": "<Keyboard>/b",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -266,7 +276,7 @@
                 {
                     "name": "",
                     "id": "25026dea-ccf8-4d8e-bbe6-37982d7ef681",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -288,7 +298,7 @@
                 {
                     "name": "",
                     "id": "e58c0692-4411-49ed-a3ff-4cb3a9a9db48",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
