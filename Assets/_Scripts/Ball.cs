@@ -47,21 +47,19 @@ public class Ball : MonoBehaviour
 
     void RotateToFaceMovementDirection() {
         float zeroSpeedDeadzone = 0.01f;
-        float rotateTime = 0.05f;
+        float rotateTime = 20f;
         float minRotation = -15f;
         float maxRotation = 15f;
 
-        //spriteTransform.eulerAngles = new Vector3(0f, 0f, spriteTransform.eulerAngles.z); //Prevents sprite rotation in x and y
-
         float rotTarget = 0f;
-        Debug.Log("X " + rb.velocity.x + " Z " + rb.velocity.z);
+
         if (!(rb.velocity.x >= -zeroSpeedDeadzone && rb.velocity.x <= zeroSpeedDeadzone)
             && !(rb.velocity.z >= -zeroSpeedDeadzone && rb.velocity.z <= zeroSpeedDeadzone))
         {
             rotTarget = Mathf.Clamp(Mathf.Atan(rb.velocity.z / rb.velocity.x) * -Mathf.Rad2Deg, minRotation, maxRotation);
         }
 
-        float y = CustomMath.LerpThrough360Degrees(spriteTransform.eulerAngles.y, rotTarget, Time.deltaTime * 20f);
+        float y = CustomMath.LerpThrough360Degrees(spriteTransform.eulerAngles.y, rotTarget, Time.deltaTime * rotateTime);
         spriteTransform.eulerAngles = new Vector3(0f, y, spriteTransform.eulerAngles.z);
 
     }
