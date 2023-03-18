@@ -524,36 +524,11 @@ public class MovementController3D : MonoBehaviour {
                 trueTarget = 360f + rotTarget;
             }
 
-            float y = LerpThrough360Degrees(SpritesTransform.eulerAngles.y, trueTarget, Time.deltaTime * 20f);
+            float y = CustomMath.LerpThrough360Degrees(SpritesTransform.eulerAngles.y, trueTarget, Time.deltaTime * 20f);
 
             SpritesTransform.eulerAngles = new Vector3(0f, y, 0f);
         }
 
-    }
-
-    private float LerpThrough360Degrees(float a, float b, float t) {
-        //Offset by 360 to avoid passing through "360 = 0". Makes all calculations positive
-        float offset = 360f;
-        a += offset;
-        b += offset;
-        float distance = b - a;
-
-        //When passing through "360 = 0" from positive to negative, use shortest path
-        //EX. if going from 0 -> 345 (the long way), instead go 0 -> -15 (the short way)
-        //This can be achieved by subtracting 360 from the target point
-        if (distance > 180f) {
-            b -= 360f;
-        }
-        //Reverse in the event of going from negative to positive
-        else if (distance < -180f) {
-            a -= 360f;
-        }
-
-        //Recalculate distance with new values and lerp based on percentage completion
-        distance = b - a;
-        float position = a + distance * t;
-
-        return position - 360f; //Remove initial offset, bringing values into appropriate range
     }
 
     public void SetRegisterPlayerMovementInput(bool state) {
