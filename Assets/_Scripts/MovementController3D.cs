@@ -68,7 +68,7 @@ public class MovementController3D : MonoBehaviour {
     int wallTimerCheckStage = 0;                                //State for checking wall slide timers
         
     //WALL JUMP
-    float inverseMovementDir = -1f;                              //Direction player should wall jump in (opposite of facing direction)
+    float inverseMovementDir = -1f;                             //Direction player should wall jump in (opposite of facing direction)
     Vector2 wallJumpAngle = new Vector2(1f, 3f);                //Angle of wall jump (This needs to be normalized before use)
     bool isWallJumping = false;                                 //Whether or not the character is currently mid walljump
     const float wallJumpDisableMovementTime = 0.05f;            //Buffer time where player cannot input any movement after wall jumping 
@@ -396,8 +396,8 @@ public class MovementController3D : MonoBehaviour {
         //RECOVER FROM RAGDOLL
         if (CheckJumpBuffer() && pController.ragdollController.RagdollActive && pController.ragdollController.CheckRagDollBuffer()) {
             RagdollOrientation ragdollOrientation = pController.ragdollController.GetRagdollOrientation();
-
             pController.ragdollController.DisableRagdoll();
+            
             SetRegisterPlayerMovementInput(true);
             PerformJump();
 
@@ -533,6 +533,12 @@ public class MovementController3D : MonoBehaviour {
 
     public void SetRegisterPlayerMovementInput(bool state) {
         registerPlayerMovementInput = state;
+    }
+
+    public void NotifyRagdollActivated()
+    {
+        isWallJumping = false;
+        SetRegisterPlayerMovementInput(false);
     }
 
     public void OnStartSprint() {

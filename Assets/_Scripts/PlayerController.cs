@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour, IController
     }
 
     public void onPressButtonEast() {
-        movementController.SetRegisterPlayerMovementInput(false);
+        movementController.NotifyRagdollActivated();
         ragdollController.ActivateRagdoll(rb.velocity, 1f);
     }
 
