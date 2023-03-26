@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] Animator animator;
     bool canUpdate = true;
     Dictionary<int, float> clipLengthDict = new Dictionary<int, float>();
+    private bool isCoroutineExecuting = false;
 
     //FULL BODY
     
@@ -64,66 +66,66 @@ public class PlayerAnimator : MonoBehaviour
         if (canUpdate) {
             switch (state) {
                 case PlayerStateController.PlayerStates.IDLE:
-                    PlayAnimation(LEGS_IDLE, Layer.LEGS);
-                    PlayAnimation(BODY_IDLE, Layer.BODY);
+                    PlayAnimation(LEGS_IDLE, Layer.LEGS, false);
+                    PlayAnimation(BODY_IDLE, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.IDLE_DRIBBLING:
-                    PlayAnimation(LEGS_IDLE, Layer.LEGS);
-                    PlayAnimation(BODY_DRIBBLE, Layer.BODY);
+                    PlayAnimation(LEGS_IDLE, Layer.LEGS, false);
+                    PlayAnimation(BODY_DRIBBLE, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.RUN_DRIBBLING:
-                    PlayAnimation(LEGS_RUN, Layer.LEGS);
-                    PlayAnimation(BODY_DRIBBLE, Layer.BODY);
+                    PlayAnimation(LEGS_RUN, Layer.LEGS, false);
+                    PlayAnimation(BODY_DRIBBLE, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.RUNNING:
-                    PlayAnimation(LEGS_RUN, Layer.LEGS);
-                    PlayAnimation(BODY_RUN, Layer.BODY);
+                    PlayAnimation(LEGS_RUN, Layer.LEGS, false);
+                    PlayAnimation(BODY_RUN, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.SPRINTING:
-                    PlayAnimation(LEGS_SPRINTING, Layer.LEGS);
-                    PlayAnimation(BODY_SPRINTING, Layer.BODY);
+                    PlayAnimation(LEGS_SPRINTING, Layer.LEGS, false);
+                    PlayAnimation(BODY_SPRINTING, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.SPRINTING_DRIBBLING: //TODO: FINISH THIS
-                    PlayAnimation(LEGS_SPRINTING, Layer.LEGS);
-                    PlayAnimation(BODY_SPRINTING_DRIBBLING, Layer.BODY);
+                    PlayAnimation(LEGS_SPRINTING, Layer.LEGS, false);
+                    PlayAnimation(BODY_SPRINTING_DRIBBLING, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.JUMPING:
-                    PlayAnimation(LEGS_JUMP, Layer.LEGS);
-                    PlayAnimation(BODY_JUMP, Layer.BODY);
+                    PlayAnimation(LEGS_JUMP, Layer.LEGS, false);
+                    PlayAnimation(BODY_JUMP, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.JUMPING_WITH_BALL:
-                    PlayAnimation(LEGS_JUMP, Layer.LEGS);
-                    PlayAnimation(BODY_HOLDBALL, Layer.BODY);
+                    PlayAnimation(LEGS_JUMP, Layer.LEGS, false);
+                    PlayAnimation(BODY_HOLDBALL, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.SHOOTING:
-                    PlayAnimation(BODY_RAISESHOT, Layer.BODY);
+                    PlayAnimation(BODY_RAISESHOT, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.WALLSHOOTING:
-                    PlayAnimation(BODY_AIM_WALL_SHOT, Layer.BODY);
+                    PlayAnimation(BODY_AIM_WALL_SHOT, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.FALLING_WITHOUT_BALL:
-                    PlayAnimation(LEGS_FALLING, Layer.LEGS);
-                    PlayAnimation(BODY_FALLING, Layer.BODY);
+                    PlayAnimation(LEGS_FALLING, Layer.LEGS, false);
+                    PlayAnimation(BODY_FALLING, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.FALLING_WITH_BALL:
-                    PlayAnimation(LEGS_FALLING, Layer.LEGS);
-                    PlayAnimation(BODY_HOLDBALL, Layer.BODY);
+                    PlayAnimation(LEGS_FALLING, Layer.LEGS, false);
+                    PlayAnimation(BODY_HOLDBALL, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.WALLSLIDING:
-                    PlayAnimation(LEGS_WALL_SLIDE, Layer.LEGS);
-                    PlayAnimation(BODY_WALL_SLIDE, Layer.BODY);
+                    PlayAnimation(LEGS_WALL_SLIDE, Layer.LEGS, false);
+                    PlayAnimation(BODY_WALL_SLIDE, Layer.BODY, false);
                     break;
 
                 case PlayerStateController.PlayerStates.RAGDOLL:
@@ -135,36 +137,36 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    public void TriggerAnimationBasedOnPlayerState(PlayerStateController.TriggerStates state) {
+    public void TriggerAnimationBasedOnPlayerState(PlayerStateController.TriggerStates state, Action onComplete = null) {
         switch (state) {
             case PlayerStateController.TriggerStates.LAND:
-                PlayAnimation(LEGS_LANDING, Layer.LEGS, true);
-                PlayAnimation(BODY_LANDING, Layer.BODY);
+                PlayAnimation(LEGS_LANDING, Layer.LEGS, true, onComplete);
+                PlayAnimation(BODY_LANDING, Layer.BODY, false, onComplete);
                 break;
 
             case PlayerStateController.TriggerStates.LANDWITHBALL:
-                PlayAnimation(LEGS_LANDING, Layer.LEGS, true);
-                PlayAnimation(BODY_LANDING_WITH_BALL, Layer.BODY);
+                PlayAnimation(LEGS_LANDING, Layer.LEGS, true, onComplete);
+                PlayAnimation(BODY_LANDING_WITH_BALL, Layer.BODY, false, onComplete);
                 break;
 
             case PlayerStateController.TriggerStates.RELEASESHOT:
-                PlayAnimation(BODY_RELEASESHOT, Layer.BODY, true);
+                PlayAnimation(BODY_RELEASESHOT, Layer.BODY, true, onComplete);
                 break;
 
             case PlayerStateController.TriggerStates.RELEASEWALLSHOT:
-                PlayAnimation(BODY_RELEASE_WALL_SHOT, Layer.BODY, true);
+                PlayAnimation(BODY_RELEASE_WALL_SHOT, Layer.BODY, true, onComplete);
                 break;
 
             case PlayerStateController.TriggerStates.SWAT:
-                PlayAnimation(BODY_SWAT, Layer.BODY, true);
+                PlayAnimation(BODY_SWAT, Layer.BODY, true, onComplete);
                 break;
 
             case PlayerStateController.TriggerStates.GET_UP_FRONT:
-                PlayAnimation(BODY_GETUPFRONT, Layer.BODY, true);
+                PlayAnimation(BODY_GETUPFRONT, Layer.BODY, true, onComplete);
                 break;
 
             case PlayerStateController.TriggerStates.GET_UP_BACK:
-                PlayAnimation(BODY_GETUPBACK, Layer.BODY, true);
+                PlayAnimation(BODY_GETUPBACK, Layer.BODY, true, onComplete);
                 break;
 
             default:
@@ -172,67 +174,37 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    void StopAnimationUpdates(int stateHash) {
+    void StopAnimationUpdates(int stateHash, Action onComplete = null) {
         canUpdate = false;
         float delay = clipLengthDict[stateHash];
         Invoke("ContinueAnimationUpdates", delay);
+        
+        if (onComplete != null)
+        {
+            StartCoroutine(ExecuteAfterTime(delay, onComplete));
+        }
+    }
+
+    private IEnumerator ExecuteAfterTime(float time, Action task)
+    {
+        if (isCoroutineExecuting)
+            yield break;
+
+        isCoroutineExecuting = true;
+        yield return new WaitForSeconds(time);
+        task();
+        isCoroutineExecuting = false;
     }
 
     void ContinueAnimationUpdates() {
         canUpdate = true;
     }
 
-    
-    void PlayAnimation(int HashID, Layer layer, bool waitForFinish = false) {
+    // Plays an animation and calls respective callback on complete if provided
+    void PlayAnimation(int HashID, Layer layer, bool waitForFinish, Action onComplete = null) {
         animator.Play(HashID, (int)layer);
         if (waitForFinish) {
-            StopAnimationUpdates(HashID);
+            StopAnimationUpdates(HashID, onComplete);
         }
     }
-
-
-    //VARIABLES
-    //Vector2 moveVector = new Vector2(0f, 0f);
-    //bool isJumping = false;
-    //bool hasBall = false;
-    //bool isDribbling = false;
-    //bool isShooting = false;
-
-    //Triggers
-    //Swat
-    //Get up front
-    //Get up back
-
-    //public enum LegStates {
-    //    IDLE,
-    //    RUNNING,
-    //    JUMPING,
-    //    FALLING,
-    //    LANDING
-    //}
-
-    //public enum BodyStates {
-    //    IDLE,
-    //    RUNNING,
-    //    JUMPING,
-    //    FALLING,
-    //    LANDING,
-    //    DRIBBLING,
-    //    HOLDBALL,
-    //    HOLDSHOT,
-    //    RAISESHOT,
-    //    RELEASESHOT,
-    //    SWAT,
-    //    GETUPBACK,
-    //    GETUPFRONT
-    //}
-
-    //public void SetBodyState(BodyStates state) {
-    //    PlayAnimation(BODY_RUN, Layer.BODY);
-    //    PlayAnimation(LEGS_RUN, Layer.LEGS);
-    //}
-
-    //public void SetLegState(LegStates state) {
-    //    PlayAnimation(LEGS_RUN, Layer.LEGS);
-    //}
 }

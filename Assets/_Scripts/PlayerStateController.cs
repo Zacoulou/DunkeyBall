@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,9 +46,9 @@ public class PlayerStateController : MonoBehaviour
         pController.playerAnimator.SetAnimationBasedOnPlayerState(state);
     }
 
-    public void SetTriggerState(TriggerStates state) {
+    public void SetTriggerState(TriggerStates state, Action onComplete = null) {
         currentState = PlayerStates.NONE;
-        pController.playerAnimator.TriggerAnimationBasedOnPlayerState(state);
+        pController.playerAnimator.TriggerAnimationBasedOnPlayerState(state, onComplete);
     }
 
     void FixedUpdate() {

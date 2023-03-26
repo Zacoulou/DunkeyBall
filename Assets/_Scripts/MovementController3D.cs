@@ -8,70 +8,71 @@ using UnityEngine.UIElements;
 public class MovementController3D : MonoBehaviour {
     
     //INSPECTOR PANEL
-    [SerializeField] PlayerController pController;              //Reference to PlayerController
-    public UnityEvent OnLandEvent;                              //Reference to land event method
-    
-    //MOVEMENT VARIABLES
-    Character.MovementStats movementStats;                      //Class of all player stats
-    Vector3 movementVector;                                     //movement vector used to move player (accounts for speed and time)
-    Vector3 m_Velocity = Vector3.zero;                          //Reference velocity vector used for smoothdamping
-    bool isSprinting = false;                                   //Whether or not player is spriting
-    bool canMove = true;                                        //Whether or not character is allowed to move
+    [SerializeField] PlayerController pController;              // Reference to PlayerController
+    public UnityEvent OnLandEvent;                              // Reference to land event method
+                                                                   
+    //MOVEMENT VARIABLES                                           
+    Character.MovementStats movementStats;                      // Class of all player stats
+    Vector3 movementVector;                                     // movement vector used to move player (accounts for speed and time)
+    Vector3 m_Velocity = Vector3.zero;                          // Reference velocity vector used for smoothdamping
+    bool isSprinting = false;                                   // Whether or not player is spriting
+    bool canMove = true;                                        // Whether or not character is allowed to move
     [Range(0, .3f)] float m_MovementSmoothing = .05f;           // How much to smooth out the movement // 
     FacingDirection currFacingDirection = FacingDirection.RIGHT;// For determining which way the player is currently facing.
-
-    //CONTROLLER VARIABLES    
-    Vector2 rawJoystickInput;                                   //Raw joystick input
-    const double joystickMovementDeadzone = 0.2f;               //Amount Player can move joystick with no registered input
-    bool registerPlayerMovementInput = true;                    //Whether or not the player's movement input should be ignored or not
-    
-        //SMOOVE MOVEMENT
-    bool smooveMove = false;                                    //smooth movement during knockback
-    const float defaultsmooveIncrement = 0.05f;                 //Default amount character input is recognized
-    float smooveIncrement = defaultsmooveIncrement;             //Actual smooveIncrement used 
+    bool lockFacingDirection = false;                           // Locks the players facing direction (when knocked back or getting up etc...)
+                                                                   
+    //CONTROLLER VARIABLES                                         
+    Vector2 rawJoystickInput;                                   // Raw joystick input
+    const double joystickMovementDeadzone = 0.2f;               // Amount Player can move joystick with no registered input
+    bool registerPlayerMovementInput = true;                    // Whether or not the player's movement input should be ignored or not
+                                                                   
+        //SMOOVE MOVEMENT                                          
+    bool smooveMove = false;                                    // smooth movement during knockback
+    const float defaultsmooveIncrement = 0.05f;                 // Default amount character input is recognized
+    float smooveIncrement = defaultsmooveIncrement;             // Actual smooveIncrement used 
 
     //JUMP VARIABLES
-    const float minimumJumpForceMultiplier = 0.5f;              //Multiplier for jump tap vs jump hold
-    bool isHoldingJump = false;                                 //Whether or not the jump button is held
-    bool pressingJump = false;                                  //Input state for jump button
-    bool isJumping = false;                                     //If player is mid jump or not
-    float variableJumpForce = 0f;                               //Global variable for determining additional jump force
-    float totalJumpForce = 0f;                                  //Global variable for tracking total force used on current jump
-    float timeSinceLastJumpHold = 0f;                           //Time check for determining when to apply additional force
-    const float jumpTimeCheck = 0.02f;                          //Desired duration between jump checks
-    const float airBorneForce = 5f;                             //Ability for character to move while airborne
-    const float jumpBufferlength = 0.1f;                        //Max time before touching ground that jump is registered
-    float jumpBufferTimerCheck = 0f;                            //Time stamp variable for checking duration
-
-    //GROUND
-    [SerializeField] LayerMask groundLayerMask;                 //A mask determining what is ground to the character
-    [SerializeField] LayerMask OneWayPlatformLayerMask;         //A mask determining what is a one way platform to the character
-    [SerializeField] Transform groundCheck;                     //A position marking where to check if the player is grounded
-    [SerializeField] float groundCheckRadius;                   //dimensions of overlap rectangle to determine if grounded
-    bool grounded;                                              //Whether or not the player is grounded.
-    bool wasGrounded;                                           //Whether or not the player was grounded last frame
-    const float coyoteTime = 0.1f;                              //Time after falling off ledge that you can still jump
-    float lastGroundedTime = 0f;                                //Timestamp variable for measuring coyote time
-
-    //WALL
-    [SerializeField] Transform wallCheck;                       //A position marking where to check if the player is touching a wall
-    [SerializeField] Vector3 wallCheckBox;                      //dimensions of overlap rectangle to determine if touching a wall
-    bool isTouchingWall;
-    
-    //WALL SLIDING
-    bool isWallSliding;                                         //Whether or not the player is wallsliding
-    float wallSlideSpeed = -1f;                                 //Multiplier for sliding down wall
-    const float minWallHoldTime = 0.4f;                         //Minimum wall sliding time before you are allowed to fall off
-    float initialWallHoldTimeStamp = 0f;                        //Timestamp variable for tracking initial wall hold
-    float attemptToLeaveWallTimeStamp = 0f;                     //Timestamp variable for tracking time since player tried to leave wall
-    bool canLeaveWallSlide = true;                              //Whether or not the player is allowed to leave a wallslide
-    int wallTimerCheckStage = 0;                                //State for checking wall slide timers
-        
-    //WALL JUMP
-    float inverseMovementDir = -1f;                             //Direction player should wall jump in (opposite of facing direction)
-    Vector2 wallJumpAngle = new Vector2(1f, 3f);                //Angle of wall jump (This needs to be normalized before use)
-    bool isWallJumping = false;                                 //Whether or not the character is currently mid walljump
-    const float wallJumpDisableMovementTime = 0.05f;            //Buffer time where player cannot input any movement after wall jumping 
+    const float minimumJumpForceMultiplier = 0.5f;              // Multiplier for jump tap vs jump hold
+    bool isHoldingJump = false;                                 // Whether or not the jump button is held
+    bool pressingJump = false;                                  // Input state for jump button
+    bool isJumping = false;                                     // If player is mid jump or not
+    float variableJumpForce = 0f;                               // Global variable for determining additional jump force
+    float totalJumpForce = 0f;                                  // Global variable for tracking total force used on current jump
+    float timeSinceLastJumpHold = 0f;                           // Time check for determining when to apply additional force
+    const float jumpTimeCheck = 0.02f;                          // Desired duration between jump checks
+    const float airBorneForce = 5f;                             // Ability for character to move while airborne
+    const float jumpBufferlength = 0.1f;                        // Max time before touching ground that jump is registered
+    float jumpBufferTimerCheck = 0f;                            // Time stamp variable for checking duration
+                                                                   
+    //GROUND                                                       
+    [SerializeField] LayerMask groundLayerMask;                 // A mask determining what is ground to the character
+    [SerializeField] LayerMask OneWayPlatformLayerMask;         // A mask determining what is a one way platform to the character
+    [SerializeField] Transform groundCheck;                     // A position marking where to check if the player is grounded
+    [SerializeField] float groundCheckRadius;                   // dimensions of overlap rectangle to determine if grounded
+    bool grounded;                                              // Whether or not the player is grounded.
+    bool wasGrounded;                                           // Whether or not the player was grounded last frame
+    const float coyoteTime = 0.1f;                              // Time after falling off ledge that you can still jump
+    float lastGroundedTime = 0f;                                // Timestamp variable for measuring coyote time
+                                                                   
+    //WALL                                                         
+    [SerializeField] Transform wallCheck;                       // A position marking where to check if the player is touching a wall
+    [SerializeField] Vector3 wallCheckBox;                      // dimensions of overlap rectangle to determine if touching a wall
+    bool isTouchingWall;                                           
+                                                                   
+    //WALL SLIDING                                                 
+    bool isWallSliding;                                         // Whether or not the player is wallsliding
+    float wallSlideSpeed = -1f;                                 // Multiplier for sliding down wall
+    const float minWallHoldTime = 0.4f;                         // Minimum wall sliding time before you are allowed to fall off
+    float initialWallHoldTimeStamp = 0f;                        // Timestamp variable for tracking initial wall hold
+    float attemptToLeaveWallTimeStamp = 0f;                     // Timestamp variable for tracking time since player tried to leave wall
+    bool canLeaveWallSlide = true;                              // Whether or not the player is allowed to leave a wallslide
+    int wallTimerCheckStage = 0;                                // State for checking wall slide timers
+                                                                   
+    //WALL JUMP                                                    
+    float inverseMovementDir = -1f;                             // Direction player should wall jump in (opposite of facing direction)
+    Vector2 wallJumpAngle = new Vector2(1f, 3f);                // Angle of wall jump (This needs to be normalized before use)
+    bool isWallJumping = false;                                 // Whether or not the character is currently mid walljump
+    const float wallJumpDisableMovementTime = 0.05f;            // Buffer time where player cannot input any movement after wall jumping 
 
     //SLOPE MOVEMENT
     float slopeAngle = 0f;
@@ -358,7 +359,7 @@ public class MovementController3D : MonoBehaviour {
 
     // Switch the way the player is labelled as facing.
     private void Flip(FacingDirection direction) {
-        if (currFacingDirection != direction) {
+        if (currFacingDirection != direction && lockFacingDirection == false) {
             currFacingDirection = direction;
             switch (direction) {
                 case FacingDirection.LEFT:
@@ -387,6 +388,16 @@ public class MovementController3D : MonoBehaviour {
         smooveIncrement = defaultsmooveIncrement;
     }
 
+    public void LockPlayerFacingDirection()
+    {
+        lockFacingDirection = true;
+    }
+
+    public void UnlockPlayerFacingDirection()
+    {
+        lockFacingDirection = false;
+    }
+
     public void SetJumpInput() {
         pressingJump = true;
         jumpBufferTimerCheck = Time.realtimeSinceStartup;
@@ -395,19 +406,23 @@ public class MovementController3D : MonoBehaviour {
     private void CheckJump() {
         //RECOVER FROM RAGDOLL
         if (CheckJumpBuffer() && pController.ragdollController.RagdollActive && pController.ragdollController.CheckRagDollBuffer()) {
+            LockPlayerFacingDirection();
             RagdollOrientation ragdollOrientation = pController.ragdollController.GetRagdollOrientation();
             pController.ragdollController.DisableRagdoll();
-            
+
             SetRegisterPlayerMovementInput(true);
             PerformJump();
 
             //Determine which orientation to get up
             switch (ragdollOrientation) {
                 case RagdollOrientation.LEANING_BACKWARD:
-                    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK);
+                    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_BACK, UnlockPlayerFacingDirection);
                     break;
                 case RagdollOrientation.LEANING_FORWARD:
-                    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT);
+                    pController.stateController.SetTriggerState(PlayerStateController.TriggerStates.GET_UP_FRONT, UnlockPlayerFacingDirection);
+                    break;
+                case RagdollOrientation.STRAIGHT_UP:
+                    UnlockPlayerFacingDirection();
                     break;
             }
 
